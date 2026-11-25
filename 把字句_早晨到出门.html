@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汉语作业 · 把字句 · 早晨到出门</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ebe0;
+  --paper-deep: #e8dac8;
+  --sheet: #faf6f0;
+  --ink: #2c1e12;
+  --ink-soft: rgba(44, 30, 18, 0.72);
+  --ink-ghost: rgba(44, 30, 18, 0.12);
+  --accent: #4d7a66;
+  --accent2: #2d5a4a;
+  --accent-light: #e6efe9;
+  --gold: #d4882e;
+  --sun: #e69f35;
+  --line: rgba(44, 30, 18, 0.28);
+  --line-dash: rgba(77, 122, 102, 0.16);
+  --ok: #5a7832;
+  --ok-bg: #ecf2dc;
+  --bad: #b33a3a;
+  --bad-bg: #f7dbd8;
+  --kai: "Kaiti SC", "STKaiti", "KaiTi", "楷体", "BiauKai", "Noto Serif SC", serif;
+  --sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --shadow: 0 4px 16px rgba(44, 30, 18, 0.08);
+  --shadow-lg: 0 8px 32px rgba(44, 30, 18, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(44, 30, 18, 0.35); border-radius: 10px; }
+
+/* Atmospheric Autumn Grid & Mist */
+.grid-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(to right, var(--line-dash) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--line-dash) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 25%, black 45%, rgba(0,0,0,0.2) 100%);
+}
+.glow {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle at 85% 12%, rgba(212, 136, 46, 0.26), transparent 42%),
+              radial-gradient(circle at 10% 88%, rgba(77, 122, 102, 0.22), transparent 46%),
+              radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), transparent 75%);
+}
+.watermark {
+  position: fixed; right: -20px; bottom: -60px;
+  font-family: var(--kai); font-size: 340px; font-weight: 900;
+  color: rgba(77, 122, 102, 0.05); pointer-events: none; z-index: 0; line-height: 1;
+  user-select: none;
+}
+
+/* Sticky Top Navigation & Progress */
+#bar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244, 235, 224, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1.8px solid var(--ink);
+  padding: 10px 24px;
+}
+.bar-in {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+}
+.bar-title {
+  font-family: var(--kai); font-weight: 700; font-size: 19px;
+  display: flex; align-items: center; gap: 8px;
+}
+.bar-title .pill-badge {
+  background: var(--gold); color: #fff; font-size: 11px; font-weight: 800;
+  padding: 2px 8px; border-radius: 999px; text-transform: uppercase;
+}
+.progress-box {
+  flex: 1; min-width: 160px; display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 800; color: var(--ink-soft);
+}
+.progress-track {
+  flex: 1; height: 10px; border: 1.5px solid var(--ink);
+  border-radius: 999px; overflow: hidden; position: relative; background: rgba(255,255,255,0.4);
+}
+.progress-fill {
+  position: absolute; inset: 0 auto 0 0; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  transition: width 0.4s ease;
+}
+.bar-controls { display: flex; gap: 8px; align-items: center; }
+.btn-toggle {
+  border: 1.6px solid var(--ink); background: transparent; padding: 5px 13px;
+  font-size: 12px; font-weight: 800; border-radius: 999px; cursor: pointer;
+  font-family: var(--sans); transition: 0.18s; color: var(--ink);
+}
+.btn-toggle:hover { background: rgba(44, 30, 18, 0.08); transform: translateY(-1px); }
+.btn-toggle.active { background: var(--ink); color: var(--paper); }
+
+/* Header */
+header {
+  position: relative; z-index: 2; padding: 52px 24px 28px;
+  max-width: 1120px; margin: 0 auto;
+}
+.stamp {
+  display: inline-block; border: 2.5px solid var(--accent); color: var(--accent);
+  font-weight: 800; letter-spacing: 0.2em; padding: 6px 14px; font-size: 12px;
+  transform: rotate(-2deg); margin-bottom: 18px; background: rgba(230, 159, 53, 0.15);
+}
+h1 {
+  font-family: var(--kai); font-size: clamp(38px, 6vw, 68px); line-height: 1.08; font-weight: 700;
+}
+h1 .sub-en {
+  font-family: var(--sans); font-weight: 800; font-size: clamp(14px, 2vw, 18px);
+  letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-top: 12px;
+  color: var(--accent);
+}
+.lead {
+  max-width: 760px; margin-top: 16px; color: var(--ink-soft); font-size: 15.5px; line-height: 1.65;
+}
+
+/* Nav anchors */
+.nav-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px;
+}
+.nav-pill {
+  color: var(--ink); text-decoration: none; border: 1.5px solid var(--ink);
+  padding: 6px 14px; font-size: 13px; font-weight: 700; border-radius: 999px;
+  transition: 0.18s; background: rgba(250, 246, 240, 0.6);
+}
+.nav-pill:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+.nav-pill b { font-family: var(--kai); margin-right: 5px; color: var(--gold); }
+.nav-pill:hover b { color: var(--sun); }
+
+/* Main Layout */
+main {
+  position: relative; z-index: 2; max-width: 1120px; margin: 0 auto;
+  padding: 0 24px 100px;
+}
+section.task {
+  margin-top: 64px; position: relative; scroll-margin-top: 76px;
+}
+.sec-head {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.sec-badge {
+  font-family: var(--kai); font-size: 20px; font-weight: 700;
+  border: 1.8px solid var(--ink); border-radius: 50%; width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center; flex: none;
+  background: var(--sun); color: var(--ink); box-shadow: 2px 2px 0 var(--ink);
+}
+h2 {
+  font-family: var(--kai); font-size: clamp(22px, 3.8vw, 32px); font-weight: 700;
+  flex: 1; min-width: 240px;
+}
+.sec-desc {
+  color: var(--ink-soft); font-size: 14.5px; max-width: 760px; margin-bottom: 22px;
+}
+
+/* Card container */
+.card {
+  background: var(--sheet); border: 1.8px solid var(--ink);
+  border-radius: 14px; padding: 24px; box-shadow: var(--shadow);
+  margin-bottom: 20px; position: relative;
+}
+
+/* Chinese Text Typography & Toggles */
+.zh { font-family: var(--kai); font-size: 1.28em; }
+.py {
+  font-family: var(--sans); font-size: 0.88em; color: var(--accent);
+  display: block; font-weight: 700; margin-top: 2px;
+}
+.ru {
+  font-size: 0.9em; color: var(--ink-soft); display: block; margin-top: 2px;
+}
+body.hide-pinyin .py { display: none !important; }
+body.hide-trans .ru { display: none !important; }
+
+/* Dictionary Styles */
+.dict-toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px;
+}
+.dict-search {
+  flex: 1; min-width: 200px; padding: 10px 16px; border: 1.6px solid var(--ink);
+  border-radius: 999px; background: #fff; font-family: var(--sans); font-size: 14px;
+  outline: none; transition: 0.2s;
+}
+.dict-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(77,122,102,0.2); }
+.dict-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.dict-filter-btn {
+  border: 1.4px solid var(--ink); background: transparent; padding: 6px 12px;
+  border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s;
+}
+.dict-filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.dict-stats { font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-left: auto; }
+.dict-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;
+  max-height: 600px; overflow-y: auto; padding-right: 6px;
+}
+.dict-card {
+  background: #fff; border: 1.5px solid var(--ink); border-radius: 10px;
+  padding: 14px; transition: 0.2s; display: flex; flex-direction: column; justify-content: space-between;
+}
+.dict-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(44,30,18,0.1); }
+.dict-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.dict-card-hz { font-family: var(--kai); font-size: 24px; font-weight: 700; line-height: 1.2; }
+.dict-card-tools { display: flex; gap: 6px; }
+.btn-icon {
+  background: none; border: none; cursor: pointer; font-size: 16px;
+  color: var(--ink-soft); transition: 0.15s; padding: 2px;
+}
+.btn-icon:hover { color: var(--gold); transform: scale(1.15); }
+.dict-card-ex {
+  margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--line);
+  font-size: 13px; color: var(--accent2);
+}
+
+/* Flashcard Trainer */
+.flashcard-box {
+  perspective: 1000px; max-width: 440px; margin: 20px auto; min-height: 220px;
+}
+.flashcard-inner {
+  position: relative; width: 100%; height: 220px; text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d; cursor: pointer;
+}
+.flashcard-inner.flipped { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  border: 2px solid var(--ink); border-radius: 14px; padding: 24px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  box-shadow: var(--shadow);
+}
+.flashcard-front { background: #fff; }
+.flashcard-back { background: var(--paper-deep); transform: rotateY(180deg); }
+
+/* Radicals Grid */
+.rad-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;
+}
+.rad-card {
+  background: #fff; border: 1.6px solid var(--ink); border-radius: 12px;
+  padding: 16px; transition: 0.2s;
+}
+.rad-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.rad-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.rad-big {
+  font-family: var(--kai); font-size: 38px; font-weight: 700; line-height: 1;
+  color: var(--accent);
+}
+.rad-pill {
+  background: var(--accent-light); color: var(--accent2); padding: 3px 10px;
+  border-radius: 999px; font-size: 12px; font-weight: 800; border: 1.2px solid var(--accent);
+}
+
+/* Timeline Steps */
+.timeline { position: relative; margin: 24px 0; padding-left: 28px; }
+.timeline::before {
+  content: ""; position: absolute; left: 8px; top: 12px; bottom: 12px;
+  width: 2px; background: var(--accent);
+}
+.timeline-item {
+  position: relative; margin-bottom: 24px; background: #fff;
+  border: 1.5px solid var(--ink); border-radius: 12px; padding: 16px 20px;
+}
+.timeline-dot {
+  position: absolute; left: -26px; top: 18px; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--sun); border: 2px solid var(--ink);
+}
+.timeline-time {
+  font-weight: 900; font-size: 12px; color: var(--gold); letter-spacing: 0.1em;
+}
+.timeline-duo {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px;
+}
+@media(max-width: 640px) { .timeline-duo { grid-template-columns: 1fr; } }
+.timeline-col {
+  background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px;
+}
+.timeline-col-title {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px;
+}
+
+/* Reading & Questions */
+.story-box {
+  background: #fff; border: 1.8px solid var(--ink); border-radius: 14px;
+  padding: 28px; line-height: 1.85; font-size: 17px; margin-bottom: 24px;
+  box-shadow: var(--shadow); position: relative;
+}
+.story-p { margin-bottom: 16px; text-indent: 2em; }
+.story-p:last-child { margin-bottom: 0; }
+.q-card {
+  background: var(--sheet); border: 1.5px solid var(--ink); border-radius: 12px;
+  padding: 20px; margin-bottom: 16px;
+}
+.q-text { font-weight: 800; font-size: 15.5px; margin-bottom: 12px; }
+.opts-list { display: flex; flex-direction: column; gap: 8px; }
+.opt-label {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border: 1.4px solid var(--ink); border-radius: 8px; background: #fff;
+  cursor: pointer; transition: 0.15s; font-size: 14.5px;
+}
+.opt-label:hover { background: rgba(230,159,53,0.12); border-color: var(--gold); }
+.opt-label.correct { background: var(--ok-bg) !important; border-color: var(--ok) !important; color: var(--ok); font-weight: 800; }
+.opt-label.wrong { background: var(--bad-bg) !important; border-color: var(--bad) !important; color: var(--bad); }
+.q-expl {
+  margin-top: 10px; padding: 10px 14px; background: rgba(77,122,102,0.1);
+  border-left: 3px solid var(--accent); border-radius: 4px; font-size: 13px; display: none;
+}
+
+/* Matching Pairs */
+.match-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0;
+}
+@media(max-width: 768px) { .match-grid { grid-template-columns: repeat(2, 1fr); } }
+.match-card {
+  background: #fff; border: 1.6px solid var(--ink); border-radius: 10px;
+  padding: 14px 10px; text-align: center; cursor: pointer; user-select: none;
+  font-weight: 700; font-size: 15px; min-height: 60px; display: flex;
+  align-items: center; justify-content: center; transition: 0.18s;
+}
+.match-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+.match-card.selected {
+  background: var(--sun); color: var(--ink); border-color: var(--ink);
+  transform: scale(1.03); box-shadow: 0 4px 12px rgba(230,159,53,0.3);
+}
+.match-card.matched {
+  background: var(--ok-bg); color: var(--ok); border-color: var(--ok);
+  opacity: 0.6; pointer-events: none;
+}
+
+/* Interactive SVG Room & Hotspots */
+.svg-wrap {
+  background: #fff; border: 1.8px solid var(--ink); border-radius: 14px;
+  padding: 16px; overflow: hidden; position: relative; box-shadow: var(--shadow);
+}
+.svg-hotspot { cursor: pointer; transition: 0.2s; }
+.svg-hotspot:hover { filter: drop-shadow(0 0 6px var(--gold)); }
+.hotspot-pulse {
+  animation: pulse 2s infinite; transform-origin: center;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.3); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+.svg-detail-box {
+  margin-top: 16px; padding: 18px; border: 1.5px solid var(--ink);
+  border-radius: 12px; background: var(--sheet); display: none;
+}
+
+/* Grammar Guide Cards */
+.rule-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
+}
+.rule-card {
+  background: #fff; border: 1.8px solid var(--ink); border-radius: 12px;
+  padding: 20px; position: relative; border-top: 5px solid var(--accent);
+}
+.rule-title { font-family: var(--kai); font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.rule-formula {
+  background: var(--paper-deep); padding: 8px 12px; border-radius: 6px;
+  font-family: var(--kai); font-weight: 700; font-size: 14.5px; margin: 8px 0 12px;
+  border-left: 3px solid var(--gold);
+}
+.rule-ex { font-size: 13.5px; line-height: 1.5; margin-bottom: 6px; }
+
+/* Transformation Inputs */
+.trans-item {
+  background: #fff; border: 1.6px solid var(--ink); border-radius: 12px;
+  padding: 18px; margin-bottom: 14px;
+}
+.trans-orig { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.trans-input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.trans-input {
+  flex: 1; min-width: 240px; padding: 10px 14px; border: 1.5px solid var(--ink);
+  border-radius: 8px; font-family: var(--kai); font-size: 17px; outline: none;
+}
+.trans-input:focus { border-color: var(--accent); }
+.btn-action {
+  background: var(--ink); color: var(--paper); border: none; padding: 10px 18px;
+  border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.15s; font-size: 13.5px;
+}
+.btn-action:hover { background: var(--accent2); transform: translateY(-1px); }
+.trans-feedback {
+  margin-top: 10px; font-size: 13.5px; font-weight: 700; display: none;
+}
+
+/* Sentence Assembler Chips */
+.chip-bench {
+  min-height: 54px; background: #fff; border: 1.6px dashed var(--ink);
+  border-radius: 10px; padding: 10px; display: flex; gap: 8px; flex-wrap: wrap;
+  align-items: center; margin-bottom: 12px;
+}
+.chip-tray {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.chip {
+  background: var(--sheet); border: 1.4px solid var(--ink); border-radius: 6px;
+  padding: 6px 14px; font-family: var(--kai); font-size: 18px; font-weight: 700;
+  cursor: pointer; user-select: none; transition: 0.15s;
+}
+.chip:hover { background: var(--sun); transform: translateY(-1px); }
+
+/* Logic Puzzle Grid */
+.logic-table {
+  width: 100%; border-collapse: collapse; margin-top: 16px; background: #fff;
+  border: 1.6px solid var(--ink); border-radius: 10px; overflow: hidden;
+}
+.logic-table th, .logic-table td {
+  border: 1px solid var(--line); padding: 10px; text-align: center; font-size: 14px;
+}
+.logic-table th { background: var(--paper-deep); font-weight: 800; }
+.logic-cell-btn {
+  width: 34px; height: 34px; border-radius: 6px; border: 1.2px solid var(--line);
+  background: transparent; font-weight: 900; font-size: 16px; cursor: pointer;
+}
+.logic-cell-btn.yes { background: var(--ok-bg); color: var(--ok); border-color: var(--ok); }
+.logic-cell-btn.no { background: var(--bad-bg); color: var(--bad); border-color: var(--bad); }
+
+/* Writing Lab */
+.write-box {
+  width: 100%; min-height: 180px; padding: 16px; border: 1.8px solid var(--ink);
+  border-radius: 12px; font-family: var(--kai); font-size: 18px; line-height: 1.8;
+  outline: none; resize: vertical; background: #fff;
+}
+.write-meters {
+  display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 13.5px; font-weight: 800;
+}
+.write-pill {
+  background: #fff; border: 1.3px solid var(--ink); padding: 6px 12px; border-radius: 999px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Final Quiz Card */
+.quiz-score-badge {
+  display: inline-flex; align-items: center; gap: 8px; background: var(--sun);
+  border: 1.8px solid var(--ink); padding: 6px 16px; border-radius: 999px;
+  font-weight: 900; font-size: 14px; margin-bottom: 16px;
+}
+
+/* Print Styles */
+@media print {
+  #bar, .glow, .grid-bg, .btn-action, .btn-toggle { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .card { border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow"></div>
+<div class="watermark">把</div>
+
+<!-- Sticky Top Bar -->
+<header id="bar">
+  <div class="bar-in">
+    <div class="bar-title">
+      <span>把字句 · 早晨到出门</span>
+      <span class="pill-badge">Домашнее задание</span>
+    </div>
+    <div class="progress-box">
+      <div class="progress-track">
+        <div class="progress-fill" id="topProgressFill"></div>
+      </div>
+      <span id="topProgressText">0 / 14 (0%)</span>
+    </div>
+    <div class="bar-controls">
+      <button class="btn-toggle active" id="btnTogglePy" onclick="togglePinyin()">拼音</button>
+      <button class="btn-toggle active" id="btnToggleTr" onclick="toggleTrans()">перевод</button>
+      <button class="btn-toggle" onclick="resetAllProgress()">Сброс</button>
+      <button class="btn-toggle" onclick="window.print()">Печать</button>
+    </div>
+  </div>
+</header>
+
+<header>
+  <div class="stamp">HANYU ZUOYE · LEVEL HSK 3-4</div>
+  <h1>
+    早晨到出门 · 把字句专练
+    <span class="sub-en">Morning Routine Mastery & The Grammar of 把</span>
+  </h1>
+  <p class="lead">
+    Комплексное интерактивное домашнее задание по лексике утреннего распорядка дня (63 слова) и фундаментальной грамматической конструкции <b>把 (bǎ)</b>. 
+    Тренируйте активный словарный запас, вычитывание скрытых деталей из текста, трансформацию предложений, исправление ошибок и сборку конструкций.
+  </p>
+
+  <nav class="nav-pills">
+    <a class="nav-pill" href="#sec-dict"><b>01</b> Словарь (63)</a>
+    <a class="nav-pill" href="#sec-radicals"><b>02</b> Ключи и графика</a>
+    <a class="nav-pill" href="#sec-timeline"><b>03</b> Таймлайн утра</a>
+    <a class="nav-pill" href="#sec-reading"><b>04</b> Чтение текста</a>
+    <a class="nav-pill" href="#sec-matching"><b>05</b> Сопоставление</a>
+    <a class="nav-pill" href="#sec-svgroom"><b>06</b> Сцена SVG</a>
+    <a class="nav-pill" href="#sec-grammar"><b>07</b> Справочник 把</a>
+    <a class="nav-pill" href="#sec-transform"><b>08</b> Трансформация</a>
+    <a class="nav-pill" href="#sec-builder"><b>09</b> Сборка фраз</a>
+    <a class="nav-pill" href="#sec-errors"><b>10</b> Охота на ошибки</a>
+    <a class="nav-pill" href="#sec-gaps"><b>11</b> Контекст</a>
+    <a class="nav-pill" href="#sec-logic"><b>12</b> Детектив</a>
+    <a class="nav-pill" href="#sec-trans"><b>13</b> Перевод RU→ZH</a>
+    <a class="nav-pill" href="#sec-write"><b>14</b> Письмо</a>
+    <a class="nav-pill" href="#sec-quiz"><b>15</b> Финальный квиз</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- 1. Dictionary -->
+  <section class="task" id="sec-dict">
+    <div class="sec-head">
+      <div class="sec-badge">一</div>
+      <h2>Полный интерактивный словарь урока (63 слова)</h2>
+    </div>
+    <p class="sec-desc">
+      Все 63 слова из 4 категорий утреннего распорядка. Используйте поиск, фильтры, озвучку (Web Speech), добавляйте слова в избранное (★) и экспортируйте карточки для Anki.
+    </p>
+
+    <div class="card">
+      <div class="dict-toolbar">
+        <input type="text" class="dict-search" id="dictSearchInput" placeholder="Поиск по иероглифам, пиньиню или переводу..." oninput="filterDict()">
+        <div class="dict-filters">
+          <button class="dict-filter-btn active" data-cat="all" onclick="setDictCat(this, 'all')">Все (63)</button>
+          <button class="dict-filter-btn" data-cat="wake" onclick="setDictCat(this, 'wake')">起床 (12)</button>
+          <button class="dict-filter-btn" data-cat="wash" onclick="setDictCat(this, 'wash')">洗漱护肤 (18)</button>
+          <button class="dict-filter-btn" data-cat="breakfast" onclick="setDictCat(this, 'breakfast')">早餐 (14)</button>
+          <button class="dict-filter-btn" data-cat="ready" onclick="setDictCat(this, 'ready')">出门准备 (19)</button>
+          <button class="dict-filter-btn" data-cat="fav" onclick="setDictCat(this, 'fav')">★ Избранное</button>
+        </div>
+        <div class="dict-stats" id="dictStatsText">Найдено: 63 слова</div>
+      </div>
+
+      <div style="margin-bottom: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="btn-action" style="font-size:12px; padding:6px 14px;" onclick="exportAnkiTSV()">📥 Экспорт в Anki (TSV)</button>
+        <button class="btn-action" style="font-size:12px; padding:6px 14px; background:var(--accent2);" onclick="exportAnkiJSON()">📥 Экспорт в JSON</button>
+        <button class="btn-action" style="font-size:12px; padding:6px 14px; background:var(--gold);" onclick="openFlashcardMode()">🎴 Режим карточек</button>
+      </div>
+
+      <div class="dict-grid" id="dictGridContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Flashcard Trainer Modal / Drawer -->
+      <div id="flashcardArea" style="display:none; margin-top:24px; padding-top:20px; border-top:1.6px solid var(--ink); text-align:center;">
+        <div style="display:flex; justify-content:space-between; align-items:center; max-width:440px; margin:0 auto 12px;">
+          <h3 style="font-family:var(--kai); font-size:20px;">Тренажер флэшкарт</h3>
+          <span style="font-size:13px; font-weight:800;" id="fcProgress">1 / 63</span>
+          <button class="btn-toggle" onclick="closeFlashcardMode()">✕ Закрыть</button>
+        </div>
+        <div class="flashcard-box" onclick="flipFlashcard()">
+          <div class="flashcard-inner" id="fcInner">
+            <div class="flashcard-front">
+              <span class="zh" style="font-size:42px;" id="fcHz">闹钟</span>
+              <span style="font-size:12px; color:var(--ink-soft); margin-top:16px;">(Нажмите, чтобы перевернуть)</span>
+            </div>
+            <div class="flashcard-back">
+              <span class="py" style="font-size:18px;" id="fcPy">nàozhōng</span>
+              <span class="ru" style="font-size:16px; font-weight:700; margin-top:8px;" id="fcRu">будильник</span>
+              <span style="font-size:13px; color:var(--accent2); margin-top:12px;" id="fcEx">我把闹钟关掉了。</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:12px; justify-content:center; margin-top:14px;">
+          <button class="btn-action" style="background:var(--bad);" onclick="nextFlashcard(false)">Еще повторить</button>
+          <button class="btn-action" style="background:var(--ok);" onclick="nextFlashcard(true)">Знаю отлично</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Radicals & Keys -->
+  <section class="task" id="sec-radicals">
+    <div class="sec-head">
+      <div class="sec-badge">二</div>
+      <h2>Графика и ключи: тайны утренних иероглифов</h2>
+    </div>
+    <p class="sec-desc">
+      Понимание смысловых ключей (радикалов) помогает безошибочно запоминать и различать сложные иероглифы утренней рутины.
+    </p>
+
+    <div class="rad-grid" id="radicalsContainer">
+      <!-- Generated by JS -->
+    </div>
+  </section>
+
+  <!-- 3. Timeline with 把 Transformations -->
+  <section class="task" id="sec-timeline">
+    <div class="sec-head">
+      <div class="sec-badge">三</div>
+      <h2>Хронометраж утра (07:00 – 08:30): от факта к конструкции 把</h2>
+    </div>
+    <p class="sec-desc">
+      Сравните, как одно и то же действие выражается обычным описательным предложением и как оно преобразуется в динамичную конструкцию воздействия <b>把</b>.
+    </p>
+
+    <div class="card">
+      <div class="timeline" id="timelineContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Reading Comprehension -->
+  <section class="task" id="sec-reading">
+    <div class="sec-head">
+      <div class="sec-badge">四</div>
+      <h2>Чтение и вычитывание информации: «小雨匆忙的早晨»</h2>
+    </div>
+    <p class="sec-desc">
+      Внимательно прочитайте текст об утре студентки Сяо Юй. В тексте скрыты точные подробности: порядок действий, размещение предметов и тонкости 把. Ответьте на 6 вопросов на внимательность.
+    </p>
+
+    <div class="story-box" id="readingStoryBox">
+      <!-- Story paragraphs injected here -->
+    </div>
+
+    <div id="readingQuestionsBox">
+      <!-- Questions rendered here -->
+    </div>
+  </section>
+
+  <!-- 5. Matching Pairs -->
+  <section class="task" id="sec-matching">
+    <div class="sec-head">
+      <div class="sec-badge">五</div>
+      <h2>Сопоставление: соедини иероглифы и перевод (4 раунда)</h2>
+    </div>
+    <p class="sec-desc">
+      32 ключевых слова распределены по 4 тематическим раундам. Кликайте по иероглифу и соответствующему русскому переводу.
+    </p>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+        <h3 id="matchRoundTitle" style="font-family:var(--kai); font-size:20px;">Раунд 1</h3>
+        <div style="display:flex; gap:10px; align-items:center; font-size:13px; font-weight:800;">
+          <span>Счёт раунда: <b id="matchScore">0 / 8</b></span>
+          <button class="btn-action" style="font-size:12px; padding:5px 12px;" onclick="restartCurrentMatchRound()">Сбросить раунд</button>
+        </div>
+      </div>
+      <div class="match-grid" id="matchGrid">
+        <!-- Match cards rendered here -->
+      </div>
+      <div style="display:flex; gap:8px; justify-content:center; margin-top:14px;">
+        <button class="btn-toggle active" id="btnMatchR1" onclick="switchMatchRound(0)">Раунд 1 (Спальня)</button>
+        <button class="btn-toggle" id="btnMatchR2" onclick="switchMatchRound(1)">Раунд 2 (Ванная)</button>
+        <button class="btn-toggle" id="btnMatchR3" onclick="switchMatchRound(2)">Раунд 3 (Завтрак)</button>
+        <button class="btn-toggle" id="btnMatchR4" onclick="switchMatchRound(3)">Раунд 4 (Сборы)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Interactive SVG Room -->
+  <section class="task" id="sec-svgroom">
+    <div class="sec-head">
+      <div class="sec-badge">六</div>
+      <h2>Интерактивная комната и утренний стол (SVG)</h2>
+    </div>
+    <p class="sec-desc">
+      Перед вами план-иллюстрация утренней комнаты в эстетике традиционной гравюры. Нажимайте на мерцающие предметы, чтобы изучить их употребление в конструкции 把 и ответить на проверочный вопрос.
+    </p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 800 450" width="100%" style="width:100%; height:auto; display:block; border-radius:10px; background:#f7efe6;">
+        <!-- Room background & walls -->
+        <rect x="20" y="20" width="760" height="410" fill="#faf5ee" stroke="#2c1e12" stroke-width="2.5" rx="8"/>
+        <line x1="260" y1="20" x2="260" y2="430" stroke="#4d7a66" stroke-width="2" stroke-dasharray="6,4"/>
+        <line x1="530" y1="20" x2="530" y2="430" stroke="#4d7a66" stroke-width="2" stroke-dasharray="6,4"/>
+
+        <!-- Room Labels -->
+        <text x="140" y="50" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#4d7a66" text-anchor="middle">卧室 · Спальня</text>
+        <text x="395" y="50" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#4d7a66" text-anchor="middle">洗手间 · Ванная</text>
+        <text x="655" y="50" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#4d7a66" text-anchor="middle">书房与玄关 · Выход</text>
+
+        <!-- Bedroom objects -->
+        <!-- Bed -->
+        <rect x="45" y="100" width="190" height="280" fill="#e8dac8" stroke="#2c1e12" stroke-width="2" rx="6"/>
+        <!-- Quilt (被子) -->
+        <rect x="55" y="180" width="170" height="180" fill="#d4882e" fill-opacity="0.25" stroke="#d4882e" stroke-width="2" rx="4"/>
+        <text x="140" y="270" font-family="Kaiti SC, KaiTi, serif" font-size="18" font-weight="bold" fill="#2c1e12" text-anchor="middle">被子 (Одеяло)</text>
+        <!-- Pillow (枕头) -->
+        <rect x="75" y="120" width="130" height="45" fill="#fff" stroke="#2c1e12" stroke-width="1.5" rx="4"/>
+        <text x="140" y="148" font-family="Kaiti SC, KaiTi, serif" font-size="14" fill="#2c1e12" text-anchor="middle">枕头</text>
+        <!-- Nightstand & Alarm (闹钟) -->
+        <rect x="45" y="390" width="60" height="30" fill="#cbb7a1" stroke="#2c1e12" stroke-width="1.5" rx="3"/>
+        <circle cx="75" cy="405" r="10" fill="#e69f35" stroke="#2c1e12" stroke-width="1.5"/>
+
+        <!-- Bathroom objects -->
+        <!-- Mirror & Sink -->
+        <rect x="310" y="90" width="170" height="80" fill="#e6efe9" stroke="#4d7a66" stroke-width="2" rx="6"/>
+        <text x="395" y="130" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#2d5a4a" text-anchor="middle">镜子与洗手池</text>
+        <!-- Skincare & Toothbrush on shelf -->
+        <rect x="320" y="180" width="150" height="30" fill="#fff" stroke="#2c1e12" stroke-width="1.2" rx="3"/>
+        <rect x="330" y="190" width="14" height="26" fill="#4d7a66" rx="2"/>
+        <rect x="355" y="192" width="10" height="24" fill="#d4882e" rx="2"/>
+        <rect x="380" y="186" width="8" height="30" fill="#2c1e12" rx="1"/>
+
+        <!-- Breakfast & Study in 3rd Zone -->
+        <!-- Study Desk -->
+        <rect x="560" y="90" width="190" height="110" fill="#e8dac8" stroke="#2c1e12" stroke-width="2" rx="6"/>
+        <text x="655" y="145" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#2c1e12" text-anchor="middle">书桌 · Стол</text>
+        <!-- Laptop / Notebook -->
+        <rect x="580" y="110" width="50" height="35" fill="#fff" stroke="#2c1e12" stroke-width="1.5" rx="2"/>
+        <text x="605" y="132" font-size="10" font-weight="bold" fill="#2c1e12" text-anchor="middle">笔记本</text>
+        <!-- Pencil case & Mug -->
+        <rect x="645" y="115" width="30" height="12" fill="#e69f35" stroke="#2c1e12" stroke-width="1" rx="2"/>
+        <circle cx="700" cy="125" r="8" fill="#4d7a66"/>
+
+        <!-- Door & Entry Hallway -->
+        <rect x="570" y="260" width="170" height="140" fill="#fff" stroke="#2c1e12" stroke-width="2" rx="6"/>
+        <text x="655" y="300" font-family="Kaiti SC, KaiTi, serif" font-size="16" font-weight="bold" fill="#2c1e12" text-anchor="middle">玄关 · Дверь и выход</text>
+        <!-- Coat Rack & Umbrella -->
+        <line x1="710" y1="320" x2="710" y2="380" stroke="#2c1e12" stroke-width="3"/>
+        <path d="M700,340 Q710,320 720,340 Z" fill="#4d7a66" stroke="#2c1e12" stroke-width="1.5"/>
+
+        <!-- Interactive Hotspots (Circles with pulses) -->
+        <!-- Hotspot 1: 闹钟 -->
+        <g class="svg-hotspot" onclick="showHotspotInfo(1)">
+          <circle cx="75" cy="405" r="16" fill="#e69f35" fill-opacity="0.3" class="hotspot-pulse"/>
+          <circle cx="75" cy="405" r="7" fill="#e69f35" stroke="#2c1e12" stroke-width="1.5"/>
+        </g>
+        <!-- Hotspot 2: 被子 -->
+        <g class="svg-hotspot" onclick="showHotspotInfo(2)">
+          <circle cx="140" cy="270" r="22" fill="#d4882e" fill-opacity="0.3" class="hotspot-pulse"/>
+          <circle cx="140" cy="270" r="9" fill="#d4882e" stroke="#2c1e12" stroke-width="1.5"/>
+        </g>
+        <!-- Hotspot 3: 护肤品与牙刷 -->
+        <g class="svg-hotspot" onclick="showHotspotInfo(3)">
+          <circle cx="360" cy="195" r="18" fill="#4d7a66" fill-opacity="0.3" class="hotspot-pulse"/>
+          <circle cx="360" cy="195" r="8" fill="#4d7a66" stroke="#2c1e12" stroke-width="1.5"/>
+        </g>
+        <!-- Hotspot 4: 笔记本与笔袋 -->
+        <g class="svg-hotspot" onclick="showHotspotInfo(4)">
+          <circle cx="605" cy="125" r="18" fill="#e69f35" fill-opacity="0.3" class="hotspot-pulse"/>
+          <circle cx="605" cy="125" r="8" fill="#e69f35" stroke="#2c1e12" stroke-width="1.5"/>
+        </g>
+        <!-- Hotspot 5: 钥匙、雨伞与门 -->
+        <g class="svg-hotspot" onclick="showHotspotInfo(5)">
+          <circle cx="655" cy="340" r="20" fill="#2d5a4a" fill-opacity="0.3" class="hotspot-pulse"/>
+          <circle cx="655" cy="340" r="8" fill="#2d5a4a" stroke="#2c1e12" stroke-width="1.5"/>
+        </g>
+      </svg>
+
+      <div class="svg-detail-box" id="svgDetailBox">
+        <!-- Hotspot info displayed here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Grammar Guide -->
+  <section class="task" id="sec-grammar">
+    <div class="sec-head">
+      <div class="sec-badge">七</div>
+      <h2>Фундаментальный грамматический справочник по 把 (bǎ)</h2>
+    </div>
+    <p class="sec-desc">
+      Конструкция 把 — сердце китайской грамматики распоряжения и воздействия. Запомните 4 золотых закона:
+    </p>
+
+    <div class="rule-grid">
+      <div class="rule-card">
+        <div class="rule-title">1. Закон перемещения (Displacement)</div>
+        <p style="font-size:13.5px; color:var(--ink-soft);">
+          Перемещение предмета в определенную локацию или в руки адресата.
+        </p>
+        <div class="rule-formula">S + 把 + O + V + 在 / 到 / 进 / 给</div>
+        <div class="rule-ex">
+          <b>例句：</b><br>
+          • 他把手机<b>放进了背包里</b>。<br>
+          • 别把钥匙<b>忘在桌子上</b>。<br>
+          • 请把牛奶<b>倒进杯子里</b>。
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-title">2. Закон изменения состояния (Result)</div>
+        <p style="font-size:13.5px; color:var(--ink-soft);">
+          Действие доведено до определенного результата или изменения. «Голый» глагол запрещен!
+        </p>
+        <div class="rule-formula">S + 把 + O + V + 好 / 完 / 干净 / 掉</div>
+        <div class="rule-ex">
+          <b>例句：</b><br>
+          • 小雨把被子<b>叠好了</b>。<br>
+          • 我把温牛奶<b>喝完了</b>。<br>
+          • 用毛巾把脸<b>擦干了</b>。<br>
+          • 赶快把闹钟<b>关掉</b>！
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-title">3. Закон отрицания и модальности</div>
+        <p style="font-size:13.5px; color:var(--ink-soft);">
+          Отрицания (没 / 别) и модальные глаголы (想 / 应该 / 能) ставятся <b>СТРОГО ПЕРЕД 把</b>!
+        </p>
+        <div class="rule-formula">S + 没 / 别 / 应该 / 想 + 把 + O + V + R</div>
+        <div class="rule-ex">
+          <b>例句：</b><br>
+          • 我<b>没把</b>早饭吃完。(Ошибочно: *我把早饭没吃完)<br>
+          • 你<b>应该把</b>厚外套穿上。<br>
+          • <b>别把</b>雨伞落在教室里。
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-title">4. Требование определенности и запреты</div>
+        <p style="font-size:13.5px; color:var(--ink-soft);">
+          Объект обязан быть известным собеседникам. Запрещены глаголы чувств, знаний и состояний.
+        </p>
+        <div class="rule-formula">Определенный O + активное воздействие</div>
+        <div class="rule-ex">
+          <b>Правильно vs Ошибка:</b><br>
+          • 把<b>那杯</b>牛奶喝了 (✓) vs *把<b>一杯</b>牛奶喝了 (✕)<br>
+          • Глаголы 喜欢, 知道, 认识, 起床, 醒 <b>НИКОГДА НЕ ИСПОЛЬЗУЮТСЯ С 把</b>!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Sentence Transformations -->
+  <section class="task" id="sec-transform">
+    <div class="sec-head">
+      <div class="sec-badge">八</div>
+      <h2>Трансформация предложений: переделай в конструкцию 把 (8)</h2>
+    </div>
+    <p class="sec-desc">
+      Преобразуйте обычное предложение в безупречную конструкцию с <b>把</b>. Проверка производится мгновенно без хранения ответов в исходном коде.
+    </p>
+
+    <div id="transformationsContainer">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- 9. Sentence Builder -->
+  <section class="task" id="sec-builder">
+    <div class="sec-head">
+      <div class="sec-badge">九</div>
+      <h2>Конструктор предложений: собери фразу из плашек (8)</h2>
+    </div>
+    <p class="sec-desc">
+      Кликайте по плашкам со словами, чтобы составить грамматически верное предложение с 把. Клик по плашке в поле сборки возвращает её обратно.
+    </p>
+
+    <div id="builderContainer">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- 10. Error Detective -->
+  <section class="task" id="sec-errors">
+    <div class="sec-head">
+      <div class="sec-badge">十</div>
+      <h2>Охота на ошибки: найди и исправь типичные ловушки (8)</h2>
+    </div>
+    <p class="sec-desc">
+      Перед вами 8 предложений с типичными ошибками иностранных студентов. Определите причину ошибки и выберите верный вариант с подробным грамматическим комментарием.
+    </p>
+
+    <div id="errorDetectiveContainer">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- 11. Gap Fill in Context -->
+  <section class="task" id="sec-gaps">
+    <div class="sec-head">
+      <div class="sec-badge">十一</div>
+      <h2>Контекстный тренажер: подбери правильный элемент (10)</h2>
+    </div>
+    <p class="sec-desc">
+      Вставьте подходящее по смыслу и грамматике слово или дополнение в контекст утренних действий.
+    </p>
+
+    <div class="card" id="gapFillContainer">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- 12. Logic Puzzle -->
+  <section class="task" id="sec-logic">
+    <div class="sec-head">
+      <div class="sec-badge">十二</div>
+      <h2>Логический детектив: «Сборы в студенческом общежитии»</h2>
+    </div>
+    <p class="sec-desc">
+      Прочитайте утренние улики с конструкцией 把 и восстановите, кто из трёх студентов какие вещи упаковал и какую сумку взял.
+    </p>
+
+    <div class="card">
+      <p style="font-size:14.5px; line-height:1.65; margin-bottom:14px;">
+        В комнате студенческого общежития живут трое друзей: 小雨 (Сяо Юй), 大伟 (Да Вэй) и 马可 (Марко). Сегодня утро выдалось пасмурным с переменой погоды. Каждый из них собрал свои вещи в сумку определенного цвета и типа.
+      </p>
+
+      <div style="background:var(--sheet); border:1.5px solid var(--ink); border-radius:10px; padding:16px; margin-bottom:18px;">
+        <h4 style="font-family:var(--kai); font-size:17px; margin-bottom:8px;">Утренние показания и улики:</h4>
+        <ul style="padding-left:20px; font-size:14.5px; line-height:1.7;">
+          <li>Улика 1: 小雨没带雨伞，她把【笔袋和笔记本】装进了自己的包里。</li>
+          <li>Улика 2: 大伟下午要去羽毛球馆，他把【水杯和雨伞】装进了自己的【蓝色运动包】里。</li>
+          <li>Улика 3: 马可下午要去商业街买东西，他特意把【钱包和防晒霜】装好了。</li>
+          <li>Улика 4: 小雨背的是文艺清新的【灰色帆布包】。</li>
+          <li>Улика 5: 剩下的那只沉稳结实的【黑色双肩包】被马可背走了。</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="logic-table">
+          <thead>
+            <tr>
+              <th>Студент</th>
+              <th>Что упаковал в сумку?</th>
+              <th>Какую сумку взял?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>小雨 (Сяо Юй)</b></td>
+              <td>
+                <select class="dict-search" id="logicItem_xy" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите вещи --</option>
+                  <option value="笔袋和笔记本">笔袋和笔记本</option>
+                  <option value="水杯和雨伞">水杯和雨伞</option>
+                  <option value="钱包和防晒霜">钱包和防晒霜</option>
+                </select>
+              </td>
+              <td>
+                <select class="dict-search" id="logicBag_xy" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите сумку --</option>
+                  <option value="黑色双肩包">黑色双肩包</option>
+                  <option value="蓝色运动包">蓝色运动包</option>
+                  <option value="灰色帆布包">灰色帆布包</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><b>大伟 (Да Вэй)</b></td>
+              <td>
+                <select class="dict-search" id="logicItem_dw" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите вещи --</option>
+                  <option value="笔袋和笔记本">笔袋和笔记本</option>
+                  <option value="水杯和雨伞">水杯和雨伞</option>
+                  <option value="钱包和防晒霜">钱包和防晒霜</option>
+                </select>
+              </td>
+              <td>
+                <select class="dict-search" id="logicBag_dw" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите сумку --</option>
+                  <option value="黑色双肩包">黑色双肩包</option>
+                  <option value="蓝色运动包">蓝色运动包</option>
+                  <option value="灰色帆布包">灰色帆布包</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><b>马可 (Марко)</b></td>
+              <td>
+                <select class="dict-search" id="logicItem_mk" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите вещи --</option>
+                  <option value="笔袋和笔记本">笔袋和笔记本</option>
+                  <option value="水杯和雨伞">水杯和雨伞</option>
+                  <option value="钱包和防晒霜">钱包和防晒霜</option>
+                </select>
+              </td>
+              <td>
+                <select class="dict-search" id="logicBag_mk" style="width:100%; min-width:180px;">
+                  <option value="">-- Выберите сумку --</option>
+                  <option value="黑色双肩包">黑色双肩包</option>
+                  <option value="蓝色运动包">蓝色运动包</option>
+                  <option value="灰色帆布包">灰色帆布包</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:16px; display:flex; gap:10px; align-items:center;">
+        <button class="btn-action" onclick="checkLogicPuzzle()">Проверить разгадку</button>
+        <span id="logicPuzzleFeedback" style="font-size:14px; font-weight:800;"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. Translation Practice -->
+  <section class="task" id="sec-trans">
+    <div class="sec-head">
+      <div class="sec-badge">十三</div>
+      <h2>Мастерская перевода: с русского на китайский (10)</h2>
+    </div>
+    <p class="sec-desc">
+      Переведите практические фразы утреннего распорядка, обязательно используя конструкцию <b>把</b>. Проверка производится по хешу с поддержкой допустимых вариаций.
+    </p>
+
+    <div id="translationsContainer">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- 14. Creative Writing Lab -->
+  <section class="task" id="sec-write">
+    <div class="sec-head">
+      <div class="sec-badge">十四</div>
+      <h2>Творческая письменная лаборатория: «Мое идеальное утро»</h2>
+    </div>
+    <p class="sec-desc">
+      Напишите связный рассказ о своем утреннем распорядке от звонка будильника до выхода на занятия (минимум 80 иероглифов).
+      Обязательное условие: используйте <b>не менее 3 предложений с 把</b> и <b>не менее 5 слов из словаря урока</b>.
+      Интеллектуальный анализатор текста отслеживает выполнение условий в реальном времени!
+    </p>
+
+    <div class="card">
+      <textarea class="write-box" id="writeInput" placeholder="写一写你的早晨安排（使用“把”字句和生词）..." oninput="analyzeWriting()"></textarea>
+
+      <div class="write-meters">
+        <div class="write-pill" id="meterCharCount">Иероглифов: <b>0 / 80</b></div>
+        <div class="write-pill" id="meterBaCount">Конструкций 把: <b>0 / 3</b></div>
+        <div class="write-pill" id="meterVocabCount">Слов урока: <b>0 / 5</b></div>
+        <div class="write-pill" id="meterStatus" style="color:var(--bad);">Статус: Требуется продолжить</div>
+      </div>
+
+      <div style="margin-top:14px; font-size:13px; color:var(--ink-soft);" id="writeDetectedWords">
+        Обнаруженные слова урока: <i>(пока нет)</i>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. Scored Final Quiz -->
+  <section class="task" id="sec-quiz">
+    <div class="sec-head">
+      <div class="sec-badge">十五</div>
+      <h2>Финальный блиц-экзамен (12 вопросов)</h2>
+    </div>
+    <p class="sec-desc">
+      Итоговый проверочный тест по всем аспектам лексики и грамматики 把. Наберите максимум баллов и получите персональный сертификат мастерства!
+    </p>
+
+    <div class="card">
+      <div class="quiz-score-badge" id="quizTotalBadge">
+        Текущий балл: 0 / 12
+      </div>
+
+      <div id="quizContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="text-align:center; margin-top:24px;">
+        <button class="btn-action" style="padding:12px 28px; font-size:16px;" onclick="finishQuiz()">Завершить экзамен и рассчитать результат</button>
+        <div id="quizFinalReport" style="margin-top:16px; font-size:16px; font-weight:800;"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Data payloads from Python
+const VOCAB = [{"hz": "闹钟", "py": "nàozhōng", "ru": "будильник", "cat": "wake", "ex": "我把闹钟关掉了。"}, {"hz": "响", "py": "xiǎng", "ru": "звенеть, звучать", "cat": "wake", "ex": "早上七点闹钟响了。"}, {"hz": "醒", "py": "xǐng", "ru": "просыпаться", "cat": "wake", "ex": "我七点就醒了。"}, {"hz": "醒来", "py": "xǐnglái", "ru": "проснуться", "cat": "wake", "ex": "他慢慢醒来了。"}, {"hz": "起床", "py": "qǐchuáng", "ru": "вставать с постели", "cat": "wake", "ex": "别赖床，快起床！"}, {"hz": "伸懒腰", "py": "shēnlǎnyāo", "ru": "потягиваться", "cat": "wake", "ex": "他坐在床上伸了个懒腰。"}, {"hz": "打哈欠", "py": "dǎ hāqian", "ru": "зевать", "cat": "wake", "ex": "他一边打哈欠一边揉眼睛。"}, {"hz": "赖床", "py": "làichuáng", "ru": "валяться в постели", "cat": "wake", "ex": "周末他总喜欢赖床半个小时。"}, {"hz": "被子", "py": "bèizi", "ru": "одеяло", "cat": "wake", "ex": "起床后请把被子叠好。"}, {"hz": "枕头", "py": "zhěntou", "ru": "подушка", "cat": "wake", "ex": "他把枕头拍松了放好。"}, {"hz": "床单", "py": "chuángdān", "ru": "простыня", "cat": "wake", "ex": "她把床单整理得平平整整。"}, {"hz": "拖鞋", "py": "tuōxié", "ru": "тапочки", "cat": "wake", "ex": "他把拖鞋穿上去了洗手间。"}, {"hz": "洗手间", "py": "xǐshǒujiān", "ru": "ванная комната, туалет", "cat": "wash", "ex": "小雨走进洗手间去刷牙。"}, {"hz": "厕所", "py": "cèsuǒ", "ru": "туалет", "cat": "wash", "ex": "他先去了一趟厕所。"}, {"hz": "刷牙", "py": "shuāyá", "ru": "чистить зубы", "cat": "wash", "ex": "早上起床后一定要刷牙。"}, {"hz": "牙刷", "py": "yáshuā", "ru": "зубная щетка", "cat": "wash", "ex": "他把牙刷放进漱口杯里。"}, {"hz": "牙膏", "py": "yágāo", "ru": "зубная паста", "cat": "wash", "ex": "他把牙膏挤在牙刷上。"}, {"hz": "洗脸", "py": "xǐliǎn", "ru": "умывать лицо", "cat": "wash", "ex": "用温水把脸洗干净。"}, {"hz": "毛巾", "py": "máojīn", "ru": "полотенце", "cat": "wash", "ex": "用干净的毛巾把脸擦干。"}, {"hz": "肥皂", "py": "féizào", "ru": "мыло", "cat": "wash", "ex": "他用肥皂把手洗干净了。"}, {"hz": "洗手液", "py": "xǐshǒuyè", "ru": "жидкое мыло", "cat": "wash", "ex": "把洗手液挤在手上揉出泡沫。"}, {"hz": "护肤", "py": "hùfū", "ru": "уход за кожей", "cat": "wash", "ex": "洗完脸后要认真护肤。"}, {"hz": "爽肤水", "py": "shuǎngfūshuǐ", "ru": "тоник для лица", "cat": "wash", "ex": "她把爽肤水轻轻拍在脸上。"}, {"hz": "乳液", "py": "rǔyè", "ru": "эмульсия, молочко", "cat": "wash", "ex": "把乳液涂在脸上保持水润。"}, {"hz": "面霜", "py": "miànshuāng", "ru": "крем для лица", "cat": "wash", "ex": "他把保湿面霜均匀抹在脸上。"}, {"hz": "防晒霜", "py": "fángshàishuāng", "ru": "солнцезащитный крем", "cat": "wash", "ex": "出门前要把防晒霜涂好。"}, {"hz": "剃须", "py": "tìxū", "ru": "бритье, бриться", "cat": "wash", "ex": "爸爸每天早上都要剃须。"}, {"hz": "剃须刀", "py": "tìxūdāo", "ru": "бритва", "cat": "wash", "ex": "他把剃须刀放在镜子旁边。"}, {"hz": "梳头", "py": "shūtóu", "ru": "причесываться", "cat": "wash", "ex": "她对着镜子梳头。"}, {"hz": "梳子", "py": "shūzi", "ru": "расческа", "cat": "wash", "ex": "用梳子把头发梳整齐。"}, {"hz": "早餐", "py": "zǎocān", "ru": "завтрак", "cat": "breakfast", "ex": "营养丰富的早餐非常重要。"}, {"hz": "早饭", "py": "zǎofàn", "ru": "завтрак", "cat": "breakfast", "ex": "他把早饭吃完了才去学校。"}, {"hz": "做早餐", "py": "zuò zǎocān", "ru": "готовить завтрак", "cat": "breakfast", "ex": "妈妈每天早上为全家做早餐。"}, {"hz": "吃早餐", "py": "chī zǎocān", "ru": "завтракать", "cat": "breakfast", "ex": "我们七点半一起吃早餐。"}, {"hz": "煎蛋", "py": "jiāndàn", "ru": "яичница, жареное яйцо", "cat": "breakfast", "ex": "他把煎蛋盛在盘子里。"}, {"hz": "煮鸡蛋", "py": "zhǔ jīdàn", "ru": "вареное яйцо", "cat": "breakfast", "ex": "她喜欢早上吃一个煮鸡蛋。"}, {"hz": "面包", "py": "miànbāo", "ru": "хлеб", "cat": "breakfast", "ex": "把新鲜的面包切成薄片。"}, {"hz": "吐司", "py": "tǔsī", "ru": "тост", "cat": "breakfast", "ex": "他把两片吐司放进烤面包机烤热。"}, {"hz": "牛奶", "py": "niúnǎi", "ru": "молоко", "cat": "breakfast", "ex": "他把热牛奶倒进杯子里喝完了。"}, {"hz": "咖啡", "py": "kāfēi", "ru": "кофе", "cat": "breakfast", "ex": "我把这杯苦咖啡喝完了。"}, {"hz": "茶", "py": "chá", "ru": "чай", "cat": "breakfast", "ex": "爷爷把绿茶泡好了。"}, {"hz": "麦片", "py": "màipiàn", "ru": "овсяные хлопья, мюсли", "cat": "breakfast", "ex": "把麦片倒进热牛奶里搅拌。"}, {"hz": "水果", "py": "shuǐguǒ", "ru": "фрукты", "cat": "breakfast", "ex": "他把洗好的新鲜水果切成了小块。"}, {"hz": "果汁", "py": "guǒzhī", "ru": "фруктовый сок", "cat": "breakfast", "ex": "妹妹把橙汁一口气喝光了。"}, {"hz": "背包", "py": "bēibāo", "ru": "рюкзак", "cat": "ready", "ex": "他把电脑和书本放进了背包。"}, {"hz": "书包", "py": "shūbāo", "ru": "школьный портфель, сумка", "cat": "ready", "ex": "把书包装好准备去上学。"}, {"hz": "钥匙", "py": "yàoshi", "ru": "ключи", "cat": "ready", "ex": "别把钥匙忘在家里！"}, {"hz": "手机", "py": "shǒujī", "ru": "мобильный телефон", "cat": "ready", "ex": "他把手机装进了外套口袋。"}, {"hz": "钱包", "py": "qiánbāo", "ru": "кошелек", "cat": "ready", "ex": "他把钱包放在了背包最里层。"}, {"hz": "笔记本", "py": "bǐjìběn", "ru": "блокнот, тетрадь, ноутбук", "cat": "ready", "ex": "上课前把笔记本准备好。"}, {"hz": "笔袋", "py": "bǐdài", "ru": "пенал", "cat": "ready", "ex": "她把各种笔装进了可爱的笔袋。"}, {"hz": "水杯", "py": "shuǐbēi", "ru": "кружка, бутылка для воды", "cat": "ready", "ex": "他把水杯装满温水带去学校。"}, {"hz": "伞", "py": "sǎn", "ru": "зонт", "cat": "ready", "ex": "下雨天出门记得把伞带上。"}, {"hz": "雨伞", "py": "yǔsǎn", "ru": "дождевой зонт", "cat": "ready", "ex": "他把折叠雨伞放在门口。"}, {"hz": "换衣服", "py": "huàn yīfu", "ru": "переодеваться", "cat": "ready", "ex": "起床后先把睡衣换下来。"}, {"hz": "穿衣服", "py": "chuān yīfu", "ru": "одеваться", "cat": "ready", "ex": "天冷了，要把厚衣服穿上。"}, {"hz": "外套", "py": "wàitào", "ru": "куртка, пальто", "cat": "ready", "ex": "出门前他把厚外套穿好了。"}, {"hz": "鞋子", "py": "xiézi", "ru": "обувь, туфли", "cat": "ready", "ex": "他在玄关把运动鞋换上了。"}, {"hz": "戴眼镜", "py": "dài yǎnjìng", "ru": "надевать / носить очки", "cat": "ready", "ex": "他把近视眼镜戴上了。"}, {"hz": "照镜子", "py": "zhào jìngzi", "ru": "смотреться в зеркало", "cat": "ready", "ex": "出门前照镜子检查一下衣服。"}, {"hz": "检查", "py": "jiǎnchá", "ru": "проверять", "cat": "ready", "ex": "把随身物品认真检查一遍。"}, {"hz": "锁门", "py": "suǒmén", "ru": "запирать дверь", "cat": "ready", "ex": "出门后千万别忘了锁门。"}, {"hz": "出门", "py": "chūmén", "ru": "выходить из дома", "cat": "ready", "ex": "把一切准备好就可以出门了。"}];
+const RADICALS = [{"hz": "醒", "py": "xǐng", "rad": "酉", "rad_py": "yǒu", "rad_meaning": "сосуд для брожения / вино", "desc": "«酉» указывает на состояние опьянения или протрезвления, «星» (звезда/утро) задает фонетику и образ: проснуться на рассвете, когда еще мерцают звезды."}, {"hz": "闹", "py": "nào", "rad": "门", "rad_py": "mén", "rad_meaning": "ворота / дверь", "desc": "В традиционном написании 鬧: рынок (市) внутри городских ворот (門). Означает шум, базар, суету и громкий звон будильника."}, {"hz": "睡", "py": "shuì", "rad": "目", "rad_py": "mù", "rad_meaning": "глаз", "desc": "«目» (глаз) + «垂» (опускаться, свисать). Когда веки глаз тяжело опускаются вниз — человек засыпает."}, {"hz": "刷", "py": "shuā", "rad": "刂", "rad_py": "dāo", "rad_meaning": "нож / инструмент", "desc": "Инструмент (刂) с плотной щетиной (巾), которым быстро соскребают или чистят поверхность (чистить зубы, скрести)."}, {"hz": "梳", "py": "shū", "rad": "木", "rad_py": "mù", "rad_meaning": "дерево", "desc": "«木» указывает на деревянный материал традиционного гребня, а «疏» означает 'делать редким, распутывать запутавшиеся пряди'."}, {"hz": "镜", "py": "jìng", "rad": "钅", "rad_py": "jīn", "rad_meaning": "металл", "desc": "В древности зеркала отливали из полированной бронзы (металл 钅), отражающей свет до самого конца (竟)."}, {"hz": "护", "py": "hù", "rad": "扌", "rad_py": "shǒu", "rad_meaning": "рука", "desc": "Рука (扌) защищает дом и семейный очаг (户). В слове 护肤 — бережно ухаживать и защищать кожу."}, {"hz": "匙", "py": "shi / chí", "rad": "匕", "rad_py": "bǐ", "rad_meaning": "ложка / черпак", "desc": "Форма ключа напоминает древнюю ложечку или отмычку (匕). Ключ открывает то, что верно (是) заперто."}];
+const READING_TEXT_STR = `早上七点整，床头的闹钟准时响了。小雨揉了揉惺忪的眼睛，醒了过来。虽然她特别想赖床，但今天早上八点半在大学有非常重要的中文课，所以她深吸了一口气，伸了个大大的懒腰，马上从床上爬了起来。
+
+小雨下的第一道指令是自己的双手：她先把闹钟关掉，然后迅速把被子叠得整整齐齐，并把床单拉平。
+
+走进洗手间，小雨先用牙刷挤上牙膏，把牙齿刷得干干净净；接着打开温水龙头，把脸上的睡意洗掉，并用柔软的毛巾把水擦干。在护肤方面，小雨格外认真：她先把清爽的爽肤水轻轻拍在脸上，然后把保湿乳液和面霜涂抹均匀。因为今天天气晴朗、阳光强烈，出门前她还特意把防晒霜仔细地抹在了脸上和脖子上。
+
+七点四十分，小雨走进厨房做早餐。她把两片吐司放进烤面包机烤至金黄酥脆，又在平底锅里把一个鸡蛋煎好了。随后，她把温热的牛奶倒进了心爱的保温水杯里。坐在餐桌旁，小雨一边看着晨间新闻，一边把美味的煎蛋和吐司吃完了，最后把热牛奶也喝得一滴不剩。
+
+吃完早饭，已经八点十分了。小雨回到书房准备出门的随身物品。她把笔记本、装满文具的笔袋和水杯统统装进了黑色双肩背包里。正要背上包时，小雨突然发现近视眼镜不见了！她在书桌上找了半天没找到，最后才想起来：原来刚才护肤时把眼镜忘在了洗手间的镜子旁边！她赶快跑回洗手间把眼镜戴上，又照了照镜子，把防风外套穿好，换上了舒服的平底鞋。
+
+临出门前，小雨站在玄关仔细检查了一遍：手机装在外套右侧口袋，钥匙和钱包也稳稳地放在了背包的拉链内袋里。确认一切无误后，她顺手带上了一把折叠雨伞，轻轻关上大门，把门锁好，脚步轻快地走向了阳光明媚的清晨。`;
+const READING_QUESTIONS = [{"q": "1. 闹钟响了以后，小雨起床后做的第一件关于收拾房间的事是什么？", "opts": ["把温热的牛奶倒进水杯里", "先把闹钟关掉，然后把被子叠好、床单拉平", "把近视眼镜戴上并照镜子", "把厚外套穿上并换鞋子"], "ans": 1908981931, "expl": "В тексте сказано: «她先把闹钟关掉，然后迅速把被子叠得整整齐齐，并把床单拉平»."}, {"q": "2. 在洗漱和护肤环节中，小雨使用护肤品的准确顺序是什么？", "opts": ["先涂防晒霜，再抹面霜，最后拍爽肤水", "只用了肥皂洗手，没有使用任何护肤品", "先拍爽肤水，然后涂抹乳液和面霜，最后抹防晒霜", "先把防晒霜洗掉，然后用毛巾把面霜擦干"], "ans": 1795479521, "expl": "В тексте: «她先把清爽的爽肤水轻轻拍在脸上，然后把保湿乳液和面霜涂抹均匀... 出门前她还特意把防晒霜仔细地抹在了脸上和脖子上»."}, {"q": "3. 小雨今天早晨准备并享用了怎样的早餐？", "opts": ["一碗热麦片和一个煮鸡蛋", "两片烤金黄的吐司、一个煎蛋和一杯温热的牛奶", "一杯苦咖啡和两块新鲜面包", "一瓶冰果汁和切好的水果块"], "ans": 2062734559, "expl": "В тексте: «把两片吐司放进烤面包机烤至金黄酥脆，又在平底锅里把一个鸡蛋煎好了... 把温热的牛奶倒进了心爱的保温水杯里»."}, {"q": "4. 小雨在收拾书包准备出门时，发现把什么随身物品落下了？后来在哪里找到的？", "opts": ["把手机忘在了厨房的餐桌上", "把家门钥匙忘在了玄关的鞋柜上", "把近视眼镜忘在了洗手间的镜子旁边", "把钱包忘在了卧室的枕头底下"], "ans": 1366944647, "expl": "В тексте: «原来刚才护肤时把眼镜忘在了洗手间的镜子旁边！她赶快跑回洗手间把眼镜戴上»."}, {"q": "5. 关于小雨背包和口袋里的物品放置，下列哪项完全符合课文细节？", "opts": ["手机放在外套右侧口袋，笔记本、笔袋、水杯、钥匙和钱包都装进了背包", "雨伞、外套和拖鞋都被她装进了大书包里", "她把手机和钥匙都忘在家里了，什么都没带", "背包里只放了近视眼镜和一盒牛奶"], "ans": -380264532, "expl": "В тексте: «把笔记本、装满文具的笔袋和水杯统统装进了黑色双肩背包里... 手机装在外套右侧口袋，钥匙和钱包也稳稳地放在了背包的拉链内袋里»."}, {"q": "6. 语法思考：课文中大量出现的句子（如“把被子叠好”、“把牛奶喝完”）都属于“把”字句。下列关于“把”字句的陈述哪个是正确的？", "opts": ["“把”字句里的谓语动词后面可以什么都不带，只用单个动词原形（如：*把门关）", "“把”字后面的宾语通常是说话双方已知的、确定的人或事物，且动词后要有结果或处置补充", "否定词“没”或“别”必须放在动词后面，不能放在“把”字前面", "像“喜欢”、“知道”、“在”这样的心理或状态动词最适合用来造“把”字句"], "ans": -648125724, "expl": "Главные законы 把字句: объект всегда определен (特指), глагол выражает активное действие/распоряжение (处置), и после глагола обязательно должно быть дополнение результата/направления/частица (叠好, 喝完, 关掉)."}];
+const MATCH_ROUNDS = [{"title": "Раунд 1: Подъем и спальня (起床与寝具)", "pairs": [{"zh": "闹钟", "ru": "будильник"}, {"zh": "被子", "ru": "одеяло"}, {"zh": "枕头", "ru": "подушка"}, {"zh": "床单", "ru": "простыня"}, {"zh": "拖鞋", "ru": "тапочки"}, {"zh": "伸懒腰", "ru": "потягиваться"}, {"zh": "打哈欠", "ru": "зевать"}, {"zh": "赖床", "ru": "валяться в постели"}]}, {"title": "Раунд 2: Ванная и уход за лицом (洗漱与护肤)", "pairs": [{"zh": "牙刷", "ru": "зубная щетка"}, {"zh": "牙膏", "ru": "зубная паста"}, {"zh": "毛巾", "ru": "полотенце"}, {"zh": "爽肤水", "ru": "тоник для лица"}, {"zh": "面霜", "ru": "крем для лица"}, {"zh": "防晒霜", "ru": "солнцезащитный крем"}, {"zh": "梳子", "ru": "расческа"}, {"zh": "剃须刀", "ru": "бритва"}]}, {"title": "Раунд 3: Завтрак и напитки (早餐与饮品)", "pairs": [{"zh": "吐司", "ru": "тост"}, {"zh": "煎蛋", "ru": "яичница / жареное яйцо"}, {"zh": "煮鸡蛋", "ru": "вареное яйцо"}, {"zh": "牛奶", "ru": "молоко"}, {"zh": "咖啡", "ru": "кофе"}, {"zh": "麦片", "ru": "овсяные хлопья"}, {"zh": "水果", "ru": "фрукты"}, {"zh": "果汁", "ru": "фруктовый сок"}]}, {"title": "Раунд 4: Сборы и выход (准备与出门)", "pairs": [{"zh": "背包", "ru": "рюкзак"}, {"zh": "笔袋", "ru": "пенал"}, {"zh": "笔记本", "ru": "ноутбук / блокнот"}, {"zh": "钥匙", "ru": "ключи"}, {"zh": "钱包", "ru": "кошелек"}, {"zh": "水杯", "ru": "кружка / бутылка для воды"}, {"zh": "外套", "ru": "куртка / пальто"}, {"zh": "雨伞", "ru": "дождевой зонт"}]}];
+const TRANSFORMATIONS = [{"id": 1, "orig": "我喝完了这杯温牛奶。", "hint": "Структура: 我 + 把 + 这杯温牛奶 + 动词 + 结果补语", "valid": [1302810050, 1302810050, 1302728613, 1302728613], "std": "我把这杯温牛奶喝完了。", "expl": "Объект 这杯温牛奶 выносится перед глаголом с предлогом 把. После глагола 喝 обязательно сохраняется результат 完了."}, {"id": 2, "orig": "他放钥匙在桌子上了。", "hint": "В китайском языке перемещение предмета в место оформляется через: 把 + предмет + 放在 + место", "valid": [1732268146, 1732268146, -1191152234, -1191152234], "std": "他把钥匙放在桌子上了。", "expl": "Глагол 放 с предлогом места 在 требует перемещения объекта с 把: 他把钥匙放在桌子上了."}, {"id": 3, "orig": "请关掉那个吵闹的闹钟！", "hint": "Начните с 请把..., затем укажите будильник и глагол 关掉", "valid": [1708242818, 1708242818, 1708242818], "std": "请把那个吵闹的闹钟关掉！", "expl": "Побудительное предложение: 请把 + определенный объект + 动词 + 补语 (关掉)."}, {"id": 4, "orig": "小雨洗干净了双手和脸。", "hint": "Переместите 双手和脸 после 把, затем глагол 洗 и результат 干净了", "valid": [1961260829, 1961260829, -1767821721, -1767821721], "std": "小雨把双手和脸洗干净了。", "expl": "Результативное дополнение 干净: 洗 -> 洗干净. Формула: S + 把 + O + 洗干净了."}, {"id": 5, "orig": "弟弟吃完了盘子里的两个煎蛋。", "hint": "Объект: 盘子里的两个煎蛋. Действие: 吃完了", "valid": [-2062569472, -2062569472, -77680058, -77680058], "std": "弟弟把盘子里的两个煎蛋吃完了。", "expl": "Конкретная порция еды («яичница на тарелке») идеально подходит под статус определенного объекта в 把字句."}, {"id": 6, "orig": "姐姐装好了笔记本和笔袋。", "hint": "姐姐 + 把 + 笔记本和笔袋 + 装好了", "valid": [1987095057, 1987095057, 711760137, 711760137], "std": "姐姐把笔记本和笔袋装好了。", "expl": "装好 (упаковать, уложить в порядке). S + 把 + O + 装好了."}, {"id": 7, "orig": "出门前你应该穿好厚外套。", "hint": "Обратите внимание: модальный глагол 应该 СТРОГО перед 把!", "valid": [2004882529, 2004882529, 1138468183, -1290650016], "std": "出门前你应该把厚外套穿好。", "expl": "Критическое правило: модальные глаголы (应该, 想, 要, 能) всегда ставятся ПЕРЕД 把!"}, {"id": 8, "orig": "他没有锁好宿舍的大门。", "hint": "Отрицание 没有 ставится СТРОГО перед 把!", "valid": [-1592142553, -1592142553, -768257836, -768257836, 221049002, 221049002], "std": "他没有把宿舍的大门锁好。", "expl": "Критическое правило: отрицательные частицы 没 / 没有 никогда не ставятся после 把, только ПЕРЕД ним!"}];
+const BUILDER_ITEMS = [{"id": 1, "ru": "Я выключил звенящий будильник.", "tokens": ["把", "关掉了", "我", "吵闹的", "闹钟"], "target": "我把吵闹的闹钟关掉了", "ans": 295552067}, {"id": 2, "ru": "Он еще не допил утренний кофе.", "tokens": ["没有", "他", "早晨的", "咖啡", "把", "喝完"], "target": "他没有把早晨的咖啡喝完", "ans": 498755763}, {"id": 3, "ru": "Пожалуйста, аккуратно заправь одеяло на кровати.", "tokens": ["叠好", "请", "床上的", "被子", "把"], "target": "请把床上的被子叠好", "ans": 1734736723}, {"id": 4, "ru": "Сяо Юй бережно нанесла тоник на лицо.", "tokens": ["小雨", "把", "拍在", "爽肤水", "脸上"], "target": "小雨把爽肤水拍在脸上", "ans": 654621065}, {"id": 5, "ru": "Перед выходом ты должен надеть теплую куртку.", "tokens": ["应该", "厚外套", "穿好", "把", "你"], "target": "你应该把厚外套穿好", "ans": -1290650016}, {"id": 6, "ru": "Она положила ноутбук и ключи в рюкзак.", "tokens": ["钥匙", "放进了", "和", "笔记本", "背包里", "她", "把"], "target": "她把笔记本和钥匙放进了背包里", "ans": -276974965}, {"id": 7, "ru": "Не забудь ключи на столе в гостиной!", "tokens": ["桌子上", "忘在", "别", "把", "家门钥匙"], "target": "别把家门钥匙忘在桌子上", "ans": 1865675537}, {"id": 8, "ru": "После умывания вытри капли воды полотенцем.", "tokens": ["水", "用毛巾", "把", "脸上的", "擦干"], "target": "用毛巾把脸上的水擦干", "ans": -1232085171}];
+const ERROR_ITEMS = [{"id": 1, "bad": "我把早饭没吃完就去上学了。", "type": "Позиция отрицания (否定词位置错误)", "opts": ["我没把早饭吃完就去上学了。", "我把早饭不吃完就去上学了。", "我吃完没把早饭就去上学了。"], "ans": -848111751, "comment": "В конструкции 把 отрицание (没 / 没有 / 别 / 不要) СТРОГО предшествует слову 把: «S + 没 + 把 + O + V + 补语». Сказать *把...没... — грубая ошибка!"}, {"id": 2, "bad": "快点，请你把门关！", "type": "Голый глагол без результата (动词后缺少补语)", "opts": ["快点，请你把门关上！", "快点，请门把你关！", "快点，你门把关！"], "ans": 1146431884, "comment": "Глагол в 把-предложении никогда не может стоять в одиночестве («голый глагол»). Обязательно требуется результативное дополнение (关上, 关好), направление (关进去) или частица 了."}, {"id": 3, "bad": "他把一个新鲜面包吃完了。", "type": "Неопределенный объект (受事非特指错误)", "opts": ["他把那个新鲜面包吃完了。", "他一个新鲜面包把吃完了。", "他把一个吃完了新鲜面包。"], "ans": 1833817043, "comment": "Объект в 把字句 обязан быть известным, конкретным (特指: 这, 那) или обобщенно-определенным. Нельзя вводить новую неопределенную вещь со счетным словом «一个...»."}, {"id": 4, "bad": "今天早上我把起床得很早。", "type": "Непереходный глагол действия (不及物动词误用)", "opts": ["今天早上我起得很早。", "今天早上我把床起得很早。", "今天早上我很早就把起床了。"], "ans": -1859567406, "comment": "Конструкция 把 выражает воздействие/распоряжение над предметом. Непереходные глаголы состояния и пробуждения (起床, 醒, 睡, 走) не имеют объекта воздействия и не употребляются с 把!"}, {"id": 5, "bad": "天冷了，你把厚外套应该穿好。", "type": "Позиция модального глагола (能愿动词位置错误)", "opts": ["天冷了，你应该把厚外套穿好。", "天冷了，你把厚外套穿应该好。", "天冷了，应该厚外套你把穿好。"], "ans": -1141423416, "comment": "Модальные глаголы (应该, 想, 要, 可以, 能) должны ставиться ПЕРЕД предлогом 把, а не после него."}, {"id": 6, "bad": "我把李老师的妹妹认识。", "type": "Глагол восприятия / пассивного знания (感知认知动词误用)", "opts": ["我认识李老师的妹妹。", "我把李老师的妹妹认识了。", "我把认识李老师的妹妹。"], "ans": 1199367874, "comment": "Глаголы чувств, восприятия, ментального состояния (认识, 知道, 喜欢, 觉得, 是, 有) не производят никакого физического действия над объектом. С ними 把 категорически не используется!"}, {"id": 7, "bad": "他把这杯咖啡别喝！太烫了。", "type": "Позиция запретительного отрицания 别", "opts": ["别把这杯咖啡喝了！太烫了。", "这杯咖啡把别喝！太烫了。", "他把这杯咖啡喝别！太烫了。"], "ans": -1282392708, "comment": "Запретительная частица 别 (или 不要) ставится в самом начале перед 把: «别把 + O + V + R»."}, {"id": 8, "bad": "洗完脸后，小雨把脸擦了干。", "type": "Неверное положение частицы 了 и дополнения (补语与了位置混乱)", "opts": ["洗完脸后，小雨把脸擦干了。", "洗完脸后，小雨擦干了把脸。", "洗完脸后，小雨把脸了擦干。"], "ans": -227559000, "comment": "Результативное дополнение (干) образует с глаголом неделимый блок: 擦干 (стереть насухо). Частица завершенности 了 ставится в конце глагольного блока или предложения: 擦干了."}];
+const GAP_ITEMS = [{"id": 1, "sentence": "早上闹钟一响，我就迷迷糊糊地伸手把闹钟_____了。", "options": ["关掉", "关", "睡着", "响完"], "ans": 671862, "expl": "Глагол 关 (выключать) с результативным дополнением 掉 образует 关掉 (выключить совсем)."}, {"id": 2, "sentence": "起床后第一件事，就是要把床上的被子和枕头_____。", "options": ["整理好", "整理", "睡好", "醒来"], "ans": 25902763, "expl": "整理好 выражает достижение порядка и завершенности."}, {"id": 3, "sentence": "洗漱的时候，请先用毛巾把脸上的水滴_____。", "options": ["擦干", "洗干净", "吹走", "涂抹"], "ans": 824908, "expl": "擦 (тереть, вытирать) + 干 (сухой) = вытереть насухо."}, {"id": 4, "sentence": "今天紫外线很强，出门前一定要把防晒霜_____在脸上和手臂上。", "options": ["涂抹均匀", "穿好", "放进", "喝完"], "ans": 860162128, "expl": "Солнцезащитный крем наносят равномерно: 涂抹均匀."}, {"id": 5, "sentence": "他太渴了，端起杯子一口气就把热牛奶_____了。", "options": ["喝光", "吃饱", "洗完", "泡好"], "ans": 700236, "expl": "喝光 / 喝完 — выпить без остатка, до дна."}, {"id": 6, "sentence": "妈妈提醒小雨：吃完早饭记得把脏盘子_____洗碗池里。", "options": ["放进", "拿走", "吃在", "扔掉"], "ans": 840285, "expl": "Перемещение предмета внутрь: 把 + 盘子 + 放进 + 洗碗池里."}, {"id": 7, "sentence": "上学前，大伟把笔记本、笔袋和水杯统统_____了双肩背包。", "options": ["装进", "戴上", "穿在", "忘在"], "ans": 1122230, "expl": "装进 (уложить, упаковать внутрь сумки/рюкзака)."}, {"id": 8, "sentence": "外面下着大雨，你出门时一定要把雨伞_____！", "options": ["带上", "穿好", "喝完", "整理"], "ans": 767140, "expl": "带上 (взять с собой)."}, {"id": 9, "sentence": "千万_____把钥匙忘在卧室的桌子上，不然晚上回不来！", "options": ["别", "没", "不", "很"], "ans": 21035, "expl": "Предостережение / запрет: 千万别 + 把 + 钥匙 + 忘在..."}, {"id": 10, "sentence": "离开宿舍前，最后一步是把大门牢牢地_____。", "options": ["锁好", "关", "开好", "戴好"], "ans": 1205404, "expl": "锁好 (надежно запереть на замок)."}];
+const LOGIC_PUZZLE = {"title": "Логический детектив: Кто что упаковал перед выходом?", "intro": "В комнате студенческого общежития живут трое друзей: 小雨 (Сяо Юй), 大伟 (Да Вэй) и 马可 (Марко). Сегодня утро выдалось пасмурным с переменой погоды. Каждый из них собрал свои вещи в сумку определенного цвета и типа.", "students": ["小雨", "大伟", "马可"], "items": ["笔袋和笔记本", "水杯和雨伞", "钱包和防晒霜"], "bags": ["黑色双肩包", "蓝色运动包", "灰色帆布包"], "clues": ["Улика 1: 小雨没带雨伞，她把【笔袋和笔记本】装进了自己的包里。", "Улика 2: 大伟下午要去羽毛球馆，他把【水杯和雨伞】装进了自己的【蓝色运动包】里。", "Улика 3: 马可下午要去商业街买东西，他特意把【钱包和防晒霜】装好了。", "Улика 4: 小雨背的是文艺清新的【灰色帆布包】。", "Улика 5: 剩下的那只沉稳结实的【黑色双肩包】被马可背走了。"], "solution": {"小雨": {"item": "笔袋和笔记本", "bag": "灰色帆布包"}, "大伟": {"item": "水杯和雨伞", "bag": "蓝色运动包"}, "马可": {"item": "钱包和防晒霜", "bag": "黑色双肩包"}}};
+const TRANSLATIONS = [{"id": 1, "ru": "Выключи будильник, не буди соседа!", "hint": "快把...关掉，别...", "std": "快把闹钟关掉，别把室友吵醒！", "valid": [-529766679, -1292062138, 1617071419, -1978136401, -1359989879], "expl": "把闹钟关掉 (выключи будильник), 别把室友吵醒 (не разбуди соседа)."}, {"id": 2, "ru": "Я уже аккуратно заправил постель и уложил подушку.", "hint": "我把被子...，把枕头...", "std": "我已经把被子叠好了，把枕头摆整齐了。", "valid": [-1167939578, 1413967017, -107014008, 2098254699], "expl": "把被子叠好 (аккуратно заправить/сложить одеяло), 把枕头放好/摆整齐 (уложить подушку)."}, {"id": 3, "ru": "Быстро умойся и вытри лицо полотенцем.", "hint": "快把脸洗干净，用毛巾把脸...", "std": "快把脸洗干净，用毛巾把脸擦干。", "valid": [-192953543, 1657727950, 721286240, 1449165100], "expl": "把脸洗干净 (умыть лицо начисто), 用毛巾把脸擦干 (полотенцем вытереть насухо)."}, {"id": 4, "ru": "Перед выходом на улицу нанеси солнцезащитный крем.", "hint": "出门前要把防晒霜...", "std": "出门前要把防晒霜涂好。", "valid": [-676408145, -676493736, -384524468, -1487693908], "expl": "出门前 (перед выходом) + 要把防晒霜涂好/抹好 (нужно нанести солнцезащитный крем)."}, {"id": 5, "ru": "Он допил теплое молоко и съел тост.", "hint": "他把温牛奶...，把吐司...", "std": "他把温牛奶喝完了，把吐司吃完了。", "valid": [-612803406, -1583911149, -673919726, -1993520310], "expl": "把温牛奶喝完 (допить молоко), 把吐司吃完 (доесть тост)."}, {"id": 6, "ru": "Положи ноутбук и пенал в рюкзак.", "hint": "把笔记本和笔袋放进/装进...", "std": "把笔记本和笔袋装进背包里。", "valid": [-1083683616, -893172519, -1096082438, -305907885], "expl": "把 A 和 B 装进/放进 + 背包里 (положить в рюкзак)."}, {"id": 7, "ru": "Не забудь ключи и мобильный телефон на столе!", "hint": "别把钥匙和手机忘在...", "std": "别把钥匙和手机忘在桌子上！", "valid": [2128380110, 1202985541, -239583388, -170439182], "expl": "别把 + 钥匙和手机 + 忘在桌子上 (не забудь на столе!)."}, {"id": 8, "ru": "Ты должен надеть куртку, на улице холодно.", "hint": "你应该把厚外套...", "std": "你应该把外套穿好，外面很冷。", "valid": [-1567643693, 1942962075, 1231636195, 20483552], "expl": "你应该 (ты должен) + 把外套穿好/穿上 (надеть куртку)."}, {"id": 9, "ru": "Я еще не доел завтрак, подожди меня пять минут.", "hint": "我还没把早饭...，等我...", "std": "我还没把早饭吃完，请等我五分钟。", "valid": [-205128597, -1099092376, 384411918, -294731161], "expl": "Отрицание 没 СТРОГО перед 把: 我还没把早饭吃完."}, {"id": 10, "ru": "Перед выходом проверь вещи и запри дверь.", "hint": "出门前把东西检查一遍，把门...", "std": "出门前把东西检查好，把门锁好。", "valid": [1275261764, 122534042, 1275258833, -19058349], "expl": "把东西检查好 (проверить вещи), 把门锁好 (запереть дверь)."}];
+const QUIZ_QUESTIONS = [{"q": "1. В конструкции «S + 把 + O + V + X» чем обязательно должен являться объект O?", "opts": ["Любым неопределенным словом со счетным словом (например, 一个苹果)", "Определенным, конкретным предметом, известным обоим собеседникам", "Исключительно одушевленным лицом (человеком)", "Непереходным глаголом состояния"], "ans": -1423901709, "expl": "Фундаментальное правило: объект 把 должен быть определенным (特指), а не впервые вводимым общим понятием."}, {"q": "2. Куда ставится отрицание (没 / 没有 / 别) в предложении с 把?", "opts": ["Строго после глагола", "Строго между объектом и глаголом", "Строго перед предлогом 把", "В самом конце предложения после частицы 了"], "ans": 1250614747, "expl": "Отрицание в 把-конструкции всегда стоит ПЕРЕД 把 (например: 没把早饭吃完, 别把钥匙忘了)."}, {"q": "3. Какое из следующих предложений грамматически абсолютно ПРАВИЛЬНОЕ?", "opts": ["我把那本中文书看完了。", "我把一本书看完了。", "我把书看。", "我把今天起得很早。"], "ans": 528701019, "expl": "«那本中文书» — определенный объект, глагол «看» имеет результативное дополнение «完了»."}, {"q": "4. Какой из перечисленных глаголов КАТЕГОРИЧЕСКИ НЕЛЬЗЯ использовать в конструкции 把?", "opts": ["关 (закрывать, выключать)", "喝 (пить)", "知道 (знать)", "放 (класть, помещать)"], "ans": -597922938, "expl": "Глаголы знания, чувств и состояний (知道, 认识, 喜欢, 是, 有) не обозначают физического воздействия или перемещения, с 把 они не употребляются."}, {"q": "5. Переведите на китайский: «Вытри капли воды на лице полотенцем».", "opts": ["用毛巾把脸上的水擦干。", "把毛巾擦脸上的水干。", "用毛巾脸上的水把擦了。", "把脸擦了用毛巾干。"], "ans": -1232085171, "expl": "Инструмент (用毛巾) + 把 + объект (脸上的水) + глагол с результатом (擦干)."}, {"q": "6. Что означает фразеологическое сочетание «伸懒腰» (shēnlǎnyāo)?", "opts": ["Зевать от усталости", "Сладко потягиваться всем телом после сна", "Валяться в постели и не хотеть вставать", "Смотреться в зеркало"], "ans": -1709967841, "expl": "伸 (вытягивать) + 懒腰 (ленивая поясница) = потягиваться."}, {"q": "7. Выберите правильный порядок нанесения утренней уходовой косметики:", "opts": ["防晒霜 -> 面霜 -> 爽肤水", "爽肤水 (тоник) -> 乳液/面霜 (эмульсия/крем) -> 防晒霜 (SPF)", "面霜 -> 洗面奶 -> 爽肤水", "防晒霜 -> 刷牙 -> 漱口水"], "ans": -2052011766, "expl": "Классический утренний уход: очищение -> тоник (爽肤水) -> крем/эмульсия (乳液/面霜) -> защита от солнца (防晒霜)."}, {"q": "8. Какое исправление требуется предложению: «*你应该把厚外套穿？»", "opts": ["Убрать слово 应该", "Добавить результативное дополнение после глагола (например: 穿好 или 穿上)", "Поставить 应该 после слова 厚外套", "Заменить 把 на 被"], "ans": 1718523314, "expl": "В 把字句 недопустим «голый глагол» без дополнения результата, направления или частицы."}, {"q": "9. Какой ключ (радикал) входит в состав иероглифа «醒» (xǐng — просыпаться)?", "opts": ["酉 (сосуд для брожения / вино)", "目 (глаз)", "日 (солнце)", "木 (дерево)"], "ans": 1368103305, "expl": "В иероглифе 醒 смысловой ключ — 酉 (сосуд для вина), исторически означавший протрезвление от хмеля или сна."}, {"q": "10. Какое значение имеет результативная морфема «掉» (diào) в сочетании «把闹钟关掉»?", "opts": ["Движение снизу вверх", "Полное прекращение действия / устранение состояния (выключить насовсем)", "Повторение действия еще раз", "Неопределенное сомнение"], "ans": -457558290, "expl": "Морфема 掉 в роли результативного дополнения означает удаление, устранение, прекращение (关掉, 扔掉, 忘掉, 卖掉)."}, {"q": "11. В каком предложении модальный глагол стоит на ПРАВИЛЬНОМ месте?", "opts": ["你把房间想整理好。", "你想把房间整理好。", "你把想房间整理好。", "你把房间整理好想。"], "ans": -761100801, "expl": "Модальные глаголы (想, 要, 应该, 能) всегда ставятся перед предлогом 把: 你 + 想 + 把 + 房间 + 整理好."}, {"q": "12. Как правильно сказать: «Он не запер дверь комнаты»?", "opts": ["他把房间门没锁好。", "他没把房间门锁好。", "他把没房间门锁好。", "他房间门把没锁好。"], "ans": -1392359216, "expl": "Отрицание 没 ставится строго перед 把: 他 + 没 + 把 + 房间门 + 锁好."}];
+
+// Hashing function: exactly matches server-side hash
+function h(s){
+  let v = 0;
+  s = (s||'').trim().toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
+  for(let i=0; i<s.length; i++){
+    v = ((v<<5) - v) + s.charCodeAt(i);
+    v |= 0;
+  }
+  return v;
+}
+
+// Global state
+let currentDictCat = 'all';
+let userFavorites = JSON.parse(localStorage.getItem('hanyu_favs') || '[]');
+let currentMatchRound = 0;
+let selectedMatchCard = null;
+let matchPairsSolved = 0;
+let completedTaskSections = new Set();
+
+// Toggle pinyin & translation
+function togglePinyin(){
+  document.body.classList.toggle('hide-pinyin');
+  document.getElementById('btnTogglePy').classList.toggle('active');
+}
+function toggleTrans(){
+  document.body.classList.toggle('hide-trans');
+  document.getElementById('btnToggleTr').classList.toggle('active');
+}
+
+// Update top progress bar
+function markTaskComplete(taskKey){
+  completedTaskSections.add(taskKey);
+  const total = 14;
+  const done = Math.min(completedTaskSections.size, total);
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('topProgressFill').style.width = pct + '%';
+  document.getElementById('topProgressText').textContent = `${done} / ${total} (${pct}%)`;
+}
+
+// Reset progress
+function resetAllProgress(){
+  if(confirm("Вы действительно хотите сбросить все результаты и начать заново?")){
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+// Web Speech TTS
+function speakZh(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.9;
+  window.speechSynthesis.speak(u);
+}
+
+// 1. Render Dictionary
+function renderDict(){
+  const grid = document.getElementById('dictGridContainer');
+  const query = (document.getElementById('dictSearchInput').value || '').trim().toLowerCase();
+  grid.innerHTML = '';
+
+  let count = 0;
+  VOCAB.forEach((w, idx) => {
+    const isFav = userFavorites.includes(w.hz);
+    if(currentDictCat === 'fav' && !isFav) return;
+    if(currentDictCat !== 'all' && currentDictCat !== 'fav' && w.cat !== currentDictCat) return;
+
+    if(query){
+      const matchHz = w.hz.toLowerCase().includes(query);
+      const matchPy = w.py.toLowerCase().includes(query);
+      const matchRu = w.ru.toLowerCase().includes(query);
+      if(!matchHz && !matchPy && !matchRu) return;
+    }
+
+    count++;
+    const card = document.createElement('div');
+    card.className = 'dict-card';
+    card.innerHTML = `
+      <div class="dict-card-top">
+        <div>
+          <span class="dict-card-hz">${w.hz}</span>
+          <span class="py">${w.py}</span>
+          <span class="ru">${w.ru}</span>
+        </div>
+        <div class="dict-card-tools">
+          <button class="btn-icon" title="Озвучить" onclick="speakZh('${w.hz}')">🔊</button>
+          <button class="btn-icon" title="В избранное" onclick="toggleFav('${w.hz}', this)">${isFav ? '★' : '☆'}</button>
+        </div>
+      </div>
+      <div class="dict-card-ex">
+        <div class="zh" style="font-size:14px;">${w.ex}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('dictStatsText').textContent = `Найдено: ${count} слов`;
+}
+
+function filterDict(){ renderDict(); }
+
+function setDictCat(btn, cat){
+  document.querySelectorAll('.dict-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentDictCat = cat;
+  renderDict();
+}
+
+function toggleFav(hz, btn){
+  if(userFavorites.includes(hz)){
+    userFavorites = userFavorites.filter(x => x !== hz);
+    btn.textContent = '☆';
+  } else {
+    userFavorites.push(hz);
+    btn.textContent = '★';
+  }
+  localStorage.setItem('hanyu_favs', JSON.stringify(userFavorites));
+  if(currentDictCat === 'fav') renderDict();
+}
+
+// Export Anki TSV
+function exportAnkiTSV(){
+  let tsv = '';
+  VOCAB.forEach(w => {
+    tsv += `${w.hz}\t${w.py}\t${w.ru}\t${w.ex}\n`;
+  });
+  downloadFile(tsv, 'hanyu_morning_routine_anki.tsv', 'text/tab-separated-values');
+  markTaskComplete('dict');
+}
+
+// Export Anki JSON
+function exportAnkiJSON(){
+  const jsonStr = JSON.stringify(VOCAB, null, 2);
+  downloadFile(jsonStr, 'hanyu_morning_routine.json', 'application/json');
+  markTaskComplete('dict');
+}
+
+function downloadFile(content, fileName, contentType){
+  const a = document.createElement('a');
+  const file = new Blob([content], {type: contentType});
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
+
+// Flashcard Trainer
+let fcIndex = 0;
+function openFlashcardMode(){
+  document.getElementById('flashcardArea').style.display = 'block';
+  fcIndex = 0;
+  showFlashcard();
+}
+function closeFlashcardMode(){
+  document.getElementById('flashcardArea').style.display = 'none';
+}
+function showFlashcard(){
+  const item = VOCAB[fcIndex];
+  document.getElementById('fcHz').textContent = item.hz;
+  document.getElementById('fcPy').textContent = item.py;
+  document.getElementById('fcRu').textContent = item.ru;
+  document.getElementById('fcEx').textContent = item.ex;
+  document.getElementById('fcProgress').textContent = `${fcIndex + 1} / ${VOCAB.length}`;
+  document.getElementById('fcInner').classList.remove('flipped');
+}
+function flipFlashcard(){
+  document.getElementById('fcInner').classList.toggle('flipped');
+}
+function nextFlashcard(known){
+  fcIndex = (fcIndex + 1) % VOCAB.length;
+  showFlashcard();
+  markTaskComplete('dict');
+}
+
+// 2. Render Radicals
+function renderRadicals(){
+  const c = document.getElementById('radicalsContainer');
+  c.innerHTML = '';
+  RADICALS.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'rad-card';
+    el.innerHTML = `
+      <div class="rad-top">
+        <span class="rad-big">${r.hz}</span>
+        <div>
+          <div style="font-weight:800; font-size:15px;">${r.hz} <span class="py" style="display:inline;">${r.py}</span></div>
+          <span class="rad-pill">Ключ: ${r.rad} (${r.rad_py} — ${r.rad_meaning})</span>
+        </div>
+      </div>
+      <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.6; margin-top:8px;">
+        ${r.desc}
+      </p>
+    `;
+    c.appendChild(el);
+  });
+}
+
+// 3. Render Timeline
+const TIMELINE_STEPS = [
+  {
+    time: "07:00",
+    title: "关掉闹钟 · Звонок будильника",
+    desc: "Пробуждение от резкого звука будильника.",
+    norm: "闹钟响了，我把它关了。",
+    ba: "我先把吵闹的闹钟关掉。"
+  },
+  {
+    time: "07:05",
+    title: "起床伸懒腰 · Подъем без валяния",
+    desc: "Преодоление желания полежать в теплой постели.",
+    norm: "我不想赖床，在床上伸懒腰。",
+    ba: "伸个大大的懒腰，把身体唤醒。"
+  },
+  {
+    time: "07:12",
+    title: "整理床铺 · Заправка кровати",
+    desc: "Наведение порядка в спальне перед новым днем.",
+    norm: "我叠了被子，拉平了床单。",
+    ba: "起床后把被子叠整齐，把床单拉平。"
+  },
+  {
+    time: "07:20",
+    title: "洗漱清洁 · Ванные процедуры",
+    desc: "Чистка зубов и умывание прохладной водой.",
+    norm: "我刷了牙，用毛巾擦了脸。",
+    ba: "把牙齿刷干净，用毛巾把脸上的水擦干。"
+  },
+  {
+    time: "07:32",
+    title: "认真护肤 · Уход за кожей лица",
+    desc: "Поэтапное нанесение уходовой косметики и SPF.",
+    norm: "我拍了爽肤水，涂了面霜和防晒霜。",
+    ba: "把爽肤水轻轻拍在脸上，把防晒霜仔细涂抹均匀。"
+  },
+  {
+    time: "07:45",
+    title: "做并享用早餐 · Вкусный завтрак",
+    desc: "Поджарка тостов, яичница и горячее молоко.",
+    norm: "我吃了煎蛋和吐司，喝了热牛奶。",
+    ba: "把吐司烤热，把煎蛋吃完，把温牛奶倒进水杯喝光。"
+  },
+  {
+    time: "08:10",
+    title: "收拾随身包 · Сборы вещей",
+    desc: "Упаковка ноутбука, пенала, ключей и телефона.",
+    norm: "我放了电脑和笔袋在包里。",
+    ba: "把笔记本和笔袋装进背包，把钥匙和手机放进口袋。"
+  },
+  {
+    time: "08:25",
+    title: "检查出门 · Выход на учебу",
+    desc: "Контрольный взгляд в зеркало и запирание замка.",
+    norm: "我穿了外套，戴了眼镜，锁了门。",
+    ba: "把近视眼镜戴好，把厚外套穿上，最后把大门锁好。"
+  }
+];
+
+function renderTimeline(){
+  const c = document.getElementById('timelineContainer');
+  c.innerHTML = '';
+  TIMELINE_STEPS.forEach(st => {
+    const el = document.createElement('div');
+    el.className = 'timeline-item';
+    el.innerHTML = `
+      <div class="timeline-dot"></div>
+      <div class="timeline-time">${st.time}</div>
+      <h4 style="font-family:var(--kai); font-size:18px; margin:4px 0 6px;">${st.title}</h4>
+      <p style="font-size:13.5px; color:var(--ink-soft);">${st.desc}</p>
+      <div class="timeline-duo">
+        <div class="timeline-col">
+          <div class="timeline-col-title">Обычный порядок (S + V + O)</div>
+          <div class="zh" style="font-size:15px;">${st.norm}</div>
+        </div>
+        <div class="timeline-col" style="background:var(--ok-bg); border-color:var(--ok);">
+          <div class="timeline-col-title" style="color:var(--ok);">Формула воздействия (S + 把 + O + V + R)</div>
+          <div class="zh" style="font-size:15.5px; font-weight:700; color:var(--accent2);">${st.ba}</div>
+        </div>
+      </div>
+    `;
+    c.appendChild(el);
+  });
+}
+
+// 4. Render Reading Story and Questions
+function renderReading(){
+  const sb = document.getElementById('readingStoryBox');
+  sb.innerHTML = '';
+  const paras = READING_TEXT_STR.split('\n\n');
+  paras.forEach(p => {
+    const pEl = document.createElement('p');
+    pEl.className = 'story-p zh';
+    pEl.textContent = p;
+    sb.appendChild(pEl);
+  });
+
+  const qb = document.getElementById('readingQuestionsBox');
+  qb.innerHTML = '';
+  READING_QUESTIONS.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `rq_${idx}`;
+
+    let optsHtml = '';
+    q.opts.forEach(opt => {
+      optsHtml += `
+        <div class="opt-label" onclick="checkReadingQ(${idx}, this, '${opt.replace(/'/g, "\\'")}')">
+          <input type="radio" name="rq_opt_${idx}" style="pointer-events:none;">
+          <span>${opt}</span>
+        </div>
+      `;
+    });
+
+    card.innerHTML = `
+      <div class="q-text">${q.q}</div>
+      <div class="opts-list">${optsHtml}</div>
+      <div class="q-expl" id="rq_expl_${idx}">${q.expl}</div>
+    `;
+    qb.appendChild(card);
+  });
+}
+
+function checkReadingQ(idx, labelEl, optText){
+  const q = READING_QUESTIONS[idx];
+  const userHash = h(optText);
+  const card = document.getElementById(`rq_${idx}`);
+  const expl = document.getElementById(`rq_expl_${idx}`);
+
+  card.querySelectorAll('.opt-label').forEach(l => l.classList.remove('correct', 'wrong'));
+
+  if(userHash === q.ans){
+    labelEl.classList.add('correct');
+    expl.style.display = 'block';
+    markTaskComplete('reading');
+  } else {
+    labelEl.classList.add('wrong');
+  }
+}
+
+// 5. Matching Pairs
+function renderMatchRound(){
+  const r = MATCH_ROUNDS[currentMatchRound];
+  document.getElementById('matchRoundTitle').textContent = r.title;
+  document.getElementById('matchScore').textContent = `${matchPairsSolved} / ${r.pairs.length}`;
+
+  const grid = document.getElementById('matchGrid');
+  grid.innerHTML = '';
+
+  // Create cards
+  let cards = [];
+  r.pairs.forEach((p, idx) => {
+    cards.push({ text: p.zh, pairId: idx, type: 'zh' });
+    cards.push({ text: p.ru, pairId: idx, type: 'ru' });
+  });
+  // Shuffle cards
+  cards.sort(() => Math.random() - 0.5);
+
+  cards.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'match-card';
+    el.textContent = c.text;
+    if(c.type === 'zh') el.classList.add('zh');
+    el.dataset.pairId = c.pairId;
+    el.onclick = () => onMatchCardClick(el);
+    grid.appendChild(el);
+  });
+}
+
+function onMatchCardClick(el){
+  if(el.classList.contains('matched') || el.classList.contains('selected')) return;
+
+  if(!selectedMatchCard){
+    selectedMatchCard = el;
+    el.classList.add('selected');
+  } else {
+    if(selectedMatchCard.dataset.pairId === el.dataset.pairId && selectedMatchCard !== el){
+      // Match found!
+      selectedMatchCard.classList.remove('selected');
+      selectedMatchCard.classList.add('matched');
+      el.classList.add('matched');
+      selectedMatchCard = null;
+      matchPairsSolved++;
+      const total = MATCH_ROUNDS[currentMatchRound].pairs.length;
+      document.getElementById('matchScore').textContent = `${matchPairsSolved} / ${total}`;
+      if(matchPairsSolved === total){
+        markTaskComplete('match');
+      }
+    } else {
+      // Wrong match
+      el.classList.add('selected');
+      const prev = selectedMatchCard;
+      selectedMatchCard = null;
+      setTimeout(() => {
+        prev.classList.remove('selected');
+        el.classList.remove('selected');
+      }, 500);
+    }
+  }
+}
+
+function switchMatchRound(roundIdx){
+  currentMatchRound = roundIdx;
+  matchPairsSolved = 0;
+  selectedMatchCard = null;
+  for(let i=0; i<4; i++){
+    document.getElementById(`btnMatchR${i+1}`).classList.toggle('active', i === roundIdx);
+  }
+  renderMatchRound();
+}
+
+function restartCurrentMatchRound(){
+  matchPairsSolved = 0;
+  selectedMatchCard = null;
+  renderMatchRound();
+}
+
+// 6. SVG Room Detail
+const HOTSPOT_DATA = {
+  1: {
+    title: "闹钟 · Будильник",
+    hz: "把闹钟关掉",
+    py: "bǎ nàozhōng guāndiào",
+    desc: "Звонок будильника — первый сигнал к действию. Конструкция 把 подчеркивает воздействие на предмет с конкретным результатом.",
+    q: "Как правильно сказать: «Выключи будильник, не буди соседа!»",
+    opts: ["把闹钟关掉，别把室友吵醒！", "把闹钟关，把室友别吵醒！"],
+    correct: 0
+  },
+  2: {
+    title: "床铺与被子 · Постель и одеяло",
+    hz: "把被子叠好",
+    py: "bǎ bèizi diéhǎo",
+    desc: "«叠好» (сложить аккуратно). Результативное дополнение 好 указывает на достижение идеального порядка.",
+    q: "Какое предложение грамматически верное?",
+    opts: ["我把被子叠好在床上。", "我把床上的被子叠好了。"],
+    correct: 1
+  },
+  3: {
+    title: "洗漱与护肤 · Уход за кожей",
+    hz: "把爽肤水拍在脸上",
+    py: "bǎ shuǎngfūshuǐ pāi zài liǎn shang",
+    desc: "Перемещение тоника на поверхность лица: предложная группа 放在/拍在/涂在 указывает на место назначения.",
+    q: "Где должно стоять отрицание в фразе «Не наноси крем на глаза»?",
+    opts: ["别把面霜抹在眼睛周围！", "把面霜别抹在眼睛周围！"],
+    correct: 0
+  },
+  4: {
+    title: "书桌与文具 · Сборы на учебу",
+    hz: "把笔记本装进背包",
+    py: "bǎ bǐjìběn zhuāng jìn bēibāo",
+    desc: "Направление внутрь выражается предлогом 进: 装进 / 放进 (уложить внутрь рюкзака).",
+    q: "Заполните пропуск: 他把作业和笔记本______了书包里。",
+    opts: ["装进", "装在"],
+    correct: 0
+  },
+  5: {
+    title: "玄关与门锁 · Выход из дома",
+    hz: "把门锁好",
+    py: "bǎ mén suǒhǎo",
+    desc: "Финальный аккорд утра: надежно запереть замок перед выходом на улицу.",
+    q: "Как сказать: «Он не запер дверь»?",
+    opts: ["他没把门锁好。", "他把门没锁好。"],
+    correct: 0
+  }
+};
+
+function showHotspotInfo(id){
+  const d = HOTSPOT_DATA[id];
+  const box = document.getElementById('svgDetailBox');
+  box.style.display = 'block';
+  box.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <h4 style="font-family:var(--kai); font-size:20px; color:var(--accent2);">${d.title}</h4>
+        <div class="zh" style="font-size:22px; font-weight:700; margin:6px 0;">${d.hz}</div>
+        <div class="py">${d.py}</div>
+      </div>
+      <button class="btn-toggle" onclick="document.getElementById('svgDetailBox').style.display='none'">✕</button>
+    </div>
+    <p style="font-size:14px; margin-top:10px; color:var(--ink-soft);">${d.desc}</p>
+    <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--line);">
+      <div style="font-weight:800; font-size:14px; margin-bottom:8px;">Проверка: ${d.q}</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        ${d.opts.map((opt, i) => `
+          <button class="btn-action" style="font-size:13px; background:var(--sheet); color:var(--ink); border:1.4px solid var(--ink);" onclick="checkHotspotMiniQ(this, ${i === d.correct})">
+            ${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="hotspot-msg" style="margin-top:8px; font-size:13px; font-weight:800;"></div>
+    </div>
+  `;
+}
+
+function checkHotspotMiniQ(btn, isCorrect){
+  const parent = btn.parentElement;
+  const msg = parent.nextElementSibling;
+  parent.querySelectorAll('button').forEach(b => {
+    b.style.background = 'var(--sheet)';
+    b.style.color = 'var(--ink)';
+  });
+  if(isCorrect){
+    btn.style.background = 'var(--ok-bg)';
+    btn.style.color = 'var(--ok)';
+    msg.textContent = "✓ Абсолютно верно!";
+    msg.style.color = 'var(--ok)';
+    markTaskComplete('svg');
+  } else {
+    btn.style.background = 'var(--bad-bg)';
+    btn.style.color = 'var(--bad)';
+    msg.textContent = "✕ Попробуйте еще раз. Обратите внимание на порядок слов.";
+    msg.style.color = 'var(--bad)';
+  }
+}
+
+// 8. Sentence Transformations
+function renderTransformations(){
+  const c = document.getElementById('transformationsContainer');
+  c.innerHTML = '';
+  TRANSFORMATIONS.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'trans-item';
+    el.id = `trans_${t.id}`;
+    el.innerHTML = `
+      <div class="trans-orig">
+        <span style="font-size:12px; font-weight:800; color:var(--accent);">#${t.id}</span>
+        ${t.orig}
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft);">${t.hint}</div>
+      <div class="trans-input-row">
+        <input type="text" class="trans-input" id="trans_in_${t.id}" placeholder="Введите предложение с 把...">
+        <button class="btn-action" onclick="checkTransformation(${t.id})">Проверить</button>
+      </div>
+      <div class="trans-feedback" id="trans_fb_${t.id}"></div>
+    `;
+    c.appendChild(el);
+  });
+}
+
+function checkTransformation(id){
+  const t = TRANSFORMATIONS.find(x => x.id === id);
+  const input = document.getElementById(`trans_in_${id}`);
+  const fb = document.getElementById(`trans_fb_${id}`);
+  const val = (input.value || '').trim();
+  const userHash = h(val);
+
+  fb.style.display = 'block';
+  if(t.valid.includes(userHash)){
+    fb.innerHTML = `<span style="color:var(--ok);">✓ Отлично! Правильно: <b>${t.std}</b></span><br><span style="font-size:12px; color:var(--ink-soft);">${t.expl}</span>`;
+    input.style.borderColor = 'var(--ok)';
+    markTaskComplete('trans_transform');
+  } else {
+    fb.innerHTML = `<span style="color:var(--bad);">✕ Не совсем верно. Подсказка: ${t.hint}</span>`;
+    input.style.borderColor = 'var(--bad)';
+  }
+}
+
+// 9. Sentence Builder
+let builderState = {};
+function renderBuilder(){
+  const c = document.getElementById('builderContainer');
+  c.innerHTML = '';
+  BUILDER_ITEMS.forEach(item => {
+    builderState[item.id] = { assembled: [], pool: [...item.tokens].sort(() => Math.random() - 0.5) };
+
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.id = `builder_card_${item.id}`;
+    el.innerHTML = `
+      <div style="font-weight:800; font-size:15px; margin-bottom:6px;">
+        <span style="color:var(--gold);">#${item.id}</span> ${item.ru}
+      </div>
+      <div class="chip-bench" id="bench_${item.id}">
+        <span style="font-size:13px; color:var(--ink-ghost);">(Нажимайте на плашки ниже, чтобы собрать предложение)</span>
+      </div>
+      <div class="chip-tray" id="tray_${item.id}"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="btn-action" onclick="checkBuilderSentence(${item.id})">Проверить сборку</button>
+        <button class="btn-toggle" onclick="resetBuilderItem(${item.id})">Очистить</button>
+      </div>
+      <div id="builder_fb_${item.id}" style="margin-top:10px; font-size:13.5px; font-weight:800; display:none;"></div>
+    `;
+    c.appendChild(el);
+    updateBuilderUI(item.id);
+  });
+}
+
+function updateBuilderUI(id){
+  const st = builderState[id];
+  const bench = document.getElementById(`bench_${id}`);
+  const tray = document.getElementById(`tray_${id}`);
+
+  bench.innerHTML = '';
+  if(st.assembled.length === 0){
+    bench.innerHTML = `<span style="font-size:13px; color:var(--ink-soft);">(Нажимайте на плашки ниже, чтобы собрать фразу)</span>`;
+  } else {
+    st.assembled.forEach((word, idx) => {
+      const chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.textContent = word;
+      chip.onclick = () => {
+        st.assembled.splice(idx, 1);
+        st.pool.push(word);
+        updateBuilderUI(id);
+      };
+      bench.appendChild(chip);
+    });
+  }
+
+  tray.innerHTML = '';
+  st.pool.forEach((word, idx) => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = word;
+    chip.onclick = () => {
+      st.pool.splice(idx, 1);
+      st.assembled.push(word);
+      updateBuilderUI(id);
+    };
+    tray.appendChild(chip);
+  });
+}
+
+function resetBuilderItem(id){
+  const item = BUILDER_ITEMS.find(x => x.id === id);
+  builderState[id] = { assembled: [], pool: [...item.tokens].sort(() => Math.random() - 0.5) };
+  updateBuilderUI(id);
+  document.getElementById(`builder_fb_${id}`).style.display = 'none';
+}
+
+function checkBuilderSentence(id){
+  const item = BUILDER_ITEMS.find(x => x.id === id);
+  const st = builderState[id];
+  const assembledStr = st.assembled.join('');
+  const userHash = h(assembledStr);
+  const fb = document.getElementById(`builder_fb_${id}`);
+
+  fb.style.display = 'block';
+  if(userHash === item.ans){
+    fb.textContent = "✓ Верно! Предложение собрано идеально.";
+    fb.style.color = "var(--ok)";
+    markTaskComplete('builder');
+  } else {
+    fb.textContent = "✕ Порядок слов неверный. Попробуйте еще раз.";
+    fb.style.color = "var(--bad)";
+  }
+}
+
+// 10. Error Detective
+function renderErrors(){
+  const c = document.getElementById('errorDetectiveContainer');
+  c.innerHTML = '';
+  ERROR_ITEMS.forEach(err => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.id = `err_${err.id}`;
+
+    let optsHtml = '';
+    err.opts.forEach(opt => {
+      optsHtml += `
+        <div class="opt-label" onclick="checkErrorItem(${err.id}, this, '${opt.replace(/'/g, "\\'")}')">
+          <input type="radio" name="err_opt_${err.id}" style="pointer-events:none;">
+          <span>${opt}</span>
+        </div>
+      `;
+    });
+
+    el.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
+        <div style="font-weight:900; color:var(--bad);">✕ Ошибочное предложение:</div>
+        <span class="rad-pill">${err.type}</span>
+      </div>
+      <div class="zh" style="font-size:20px; font-weight:700; color:var(--bad); margin-bottom:12px; text-decoration:line-through;">
+        ${err.bad}
+      </div>
+      <div style="font-size:14px; font-weight:800; margin-bottom:8px;">Выберите правильный вариант исправления:</div>
+      <div class="opts-list">${optsHtml}</div>
+      <div class="q-expl" id="err_expl_${err.id}">${err.comment}</div>
+    `;
+    c.appendChild(el);
+  });
+}
+
+function checkErrorItem(id, labelEl, optText){
+  const err = ERROR_ITEMS.find(x => x.id === id);
+  const userHash = h(optText);
+  const card = document.getElementById(`err_${id}`);
+  const expl = document.getElementById(`err_expl_${id}`);
+
+  card.querySelectorAll('.opt-label').forEach(l => l.classList.remove('correct', 'wrong'));
+
+  if(userHash === err.ans){
+    labelEl.classList.add('correct');
+    expl.style.display = 'block';
+    markTaskComplete('errors');
+  } else {
+    labelEl.classList.add('wrong');
+  }
+}
+
+// 11. Gap Fill
+function renderGaps(){
+  const c = document.getElementById('gapFillContainer');
+  c.innerHTML = '';
+  GAP_ITEMS.forEach(g => {
+    const row = document.createElement('div');
+    row.style.marginBottom = '18px';
+    row.style.paddingBottom = '14px';
+    row.style.borderBottom = '1px dashed var(--line)';
+
+    const sentParts = g.sentence.split('_____');
+    let selOpts = `<option value="">-- выберите --</option>`;
+    g.options.forEach(opt => {
+      selOpts += `<option value="${opt}">${opt}</option>`;
+    });
+
+    row.innerHTML = `
+      <div style="font-size:16px; line-height:2;" class="zh">
+        <span style="font-size:13px; font-weight:800; color:var(--gold);">#${g.id}</span>
+        ${sentParts[0]}
+        <select class="dict-search" style="display:inline-block; width:auto; padding:4px 12px; font-size:16px;" onchange="checkGapItem(${g.id}, this)">
+          ${selOpts}
+        </select>
+        ${sentParts[1]}
+      </div>
+      <div id="gap_fb_${g.id}" style="font-size:13px; font-weight:700; margin-top:6px; display:none;"></div>
+    `;
+    c.appendChild(row);
+  });
+}
+
+function checkGapItem(id, selectEl){
+  const g = GAP_ITEMS.find(x => x.id === id);
+  const val = selectEl.value;
+  const userHash = h(val);
+  const fb = document.getElementById(`gap_fb_${id}`);
+
+  fb.style.display = 'block';
+  if(userHash === g.ans){
+    fb.innerHTML = `<span style="color:var(--ok);">✓ Правильно! ${g.expl}</span>`;
+    selectEl.style.borderColor = 'var(--ok)';
+    markTaskComplete('gaps');
+  } else {
+    fb.innerHTML = `<span style="color:var(--bad);">✕ Неверно. Попробуйте другой вариант.</span>`;
+    selectEl.style.borderColor = 'var(--bad)';
+  }
+}
+
+// 12. Logic Puzzle
+function checkLogicPuzzle(){
+  const fb = document.getElementById('logicPuzzleFeedback');
+  const xyItem = document.getElementById('logicItem_xy').value;
+  const xyBag = document.getElementById('logicBag_xy').value;
+  const dwItem = document.getElementById('logicItem_dw').value;
+  const dwBag = document.getElementById('logicBag_dw').value;
+  const mkItem = document.getElementById('logicItem_mk').value;
+  const mkBag = document.getElementById('logicBag_mk').value;
+
+  const sol = LOGIC_PUZZLE.solution;
+  const isCorrect = (
+    xyItem === sol["小雨"].item && xyBag === sol["小雨"].bag &&
+    dwItem === sol["大伟"].item && dwBag === sol["大伟"].bag &&
+    mkItem === sol["马可"].item && mkBag === sol["马可"].bag
+  );
+
+  if(isCorrect){
+    fb.innerHTML = `<span style="color:var(--ok);">🎉 Блестящая дедукция! Вы восстановили все улики верно: 小雨 взяла 笔袋和笔记本 в 灰色帆布包; 大伟 взял 水杯和雨伞 в 蓝色运动包; 马可 взял 钱包和防晒霜 в 黑色双肩包!</span>`;
+    markTaskComplete('logic');
+  } else {
+    fb.innerHTML = `<span style="color:var(--bad);">✕ В рассуждениях есть ошибка. Внимательно перечитайте улики 2, 4 и 5!</span>`;
+  }
+}
+
+// 13. Translations RU -> ZH
+function renderTranslations(){
+  const c = document.getElementById('translationsContainer');
+  c.innerHTML = '';
+  TRANSLATIONS.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.id = `trans_card_${t.id}`;
+    el.innerHTML = `
+      <div style="font-weight:800; font-size:16px; margin-bottom:8px;">
+        <span style="color:var(--gold);">#${t.id}</span> ${t.ru}
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">
+        Подсказка конструкции: <code>${t.hint}</code>
+      </div>
+      <div class="trans-input-row">
+        <input type="text" class="trans-input" id="tr_in_${t.id}" placeholder="Напишите перевод на китайском...">
+        <button class="btn-action" onclick="checkTranslationItem(${t.id})">Проверить</button>
+      </div>
+      <div id="tr_fb_${t.id}" style="margin-top:10px; font-size:13.5px; font-weight:700; display:none;"></div>
+    `;
+    c.appendChild(el);
+  });
+}
+
+function checkTranslationItem(id){
+  const t = TRANSLATIONS.find(x => x.id === id);
+  const input = document.getElementById(`tr_in_${id}`);
+  const fb = document.getElementById(`tr_fb_${id}`);
+  const val = (input.value || '').trim();
+  const userHash = h(val);
+
+  fb.style.display = 'block';
+  if(t.valid.includes(userHash)){
+    fb.innerHTML = `<span style="color:var(--ok);">✓ Великолепный перевод! Эталон: <b>${t.std}</b></span><br><span style="font-size:12px; color:var(--ink-soft);">${t.expl}</span>`;
+    input.style.borderColor = 'var(--ok)';
+    markTaskComplete('trans_ruzh');
+  } else {
+    fb.innerHTML = `<span style="color:var(--bad);">✕ Есть неточность. Проверьте формулу: ${t.hint}</span>`;
+    input.style.borderColor = 'var(--bad)';
+  }
+}
+
+// 14. Writing Lab Text Analyzer
+function analyzeWriting(){
+  const text = document.getElementById('writeInput').value || '';
+  // Count chinese characters
+  const charMatches = text.match(/[\u4e00-\u9fa5]/g) || [];
+  const charCount = charMatches.length;
+
+  // Count 把 constructions
+  const baMatches = text.match(/把[\u4e00-\u9fa5]{1,12}[在到进给好完掉干光抹穿戴锁关]/g) || [];
+  const baCount = baMatches.length;
+
+  // Match vocab words
+  const foundWords = [];
+  VOCAB.forEach(w => {
+    if(text.includes(w.hz) && !foundWords.includes(w.hz)){
+      foundWords.push(w.hz);
+    }
+  });
+
+  // Update UI meters
+  document.getElementById('meterCharCount').innerHTML = `Иероглифов: <b>${charCount} / 80</b>`;
+  document.getElementById('meterBaCount').innerHTML = `Конструкций 把: <b>${baCount} / 3</b>`;
+  document.getElementById('meterVocabCount').innerHTML = `Слов урока: <b>${foundWords.length} / 5</b>`;
+
+  const statusEl = document.getElementById('meterStatus');
+  if(charCount >= 80 && baCount >= 3 && foundWords.length >= 5){
+    statusEl.textContent = "Статус: Готово к сдаче! ✓";
+    statusEl.style.color = "var(--ok)";
+    markTaskComplete('writing');
+  } else {
+    statusEl.textContent = "Статус: Требуется продолжить...";
+    statusEl.style.color = "var(--bad)";
+  }
+
+  document.getElementById('writeDetectedWords').innerHTML = `
+    Обнаруженные слова урока (${foundWords.length}): ` +
+    (foundWords.length > 0 ? foundWords.map(w => `<span class="rad-pill">${w}</span>`).join(' ') : '<i>(пока нет)</i>');
+}
+
+// 15. Final Scored Quiz
+let quizUserScore = 0;
+let answeredQuizQ = new Set();
+
+function renderQuiz(){
+  const c = document.getElementById('quizContainer');
+  c.innerHTML = '';
+  QUIZ_QUESTIONS.forEach((q, idx) => {
+    const el = document.createElement('div');
+    el.style.marginBottom = '20px';
+    el.style.paddingBottom = '16px';
+    el.style.borderBottom = '1px solid var(--line)';
+    el.id = `quiz_q_${idx}`;
+
+    let optsHtml = '';
+    q.opts.forEach(opt => {
+      optsHtml += `
+        <div class="opt-label" onclick="selectQuizOpt(${idx}, this, '${opt.replace(/'/g, "\\'")}')">
+          <input type="radio" name="quiz_opt_${idx}" style="pointer-events:none;">
+          <span>${opt}</span>
+        </div>
+      `;
+    });
+
+    el.innerHTML = `
+      <div style="font-weight:800; font-size:15px; margin-bottom:10px;">${q.q}</div>
+      <div class="opts-list">${optsHtml}</div>
+      <div class="q-expl" id="quiz_expl_${idx}">${q.expl}</div>
+    `;
+    c.appendChild(el);
+  });
+}
+
+function selectQuizOpt(idx, labelEl, optText){
+  if(answeredQuizQ.has(idx)) return; // Only one attempt in final exam
+
+  answeredQuizQ.add(idx);
+  const q = QUIZ_QUESTIONS[idx];
+  const userHash = h(optText);
+  const card = document.getElementById(`quiz_q_${idx}`);
+  const expl = document.getElementById(`quiz_expl_${idx}`);
+
+  if(userHash === q.ans){
+    labelEl.classList.add('correct');
+    quizUserScore++;
+  } else {
+    labelEl.classList.add('wrong');
+  }
+  expl.style.display = 'block';
+
+  document.getElementById('quizTotalBadge').textContent = `Текущий балл: ${quizUserScore} / ${QUIZ_QUESTIONS.length}`;
+}
+
+function finishQuiz(){
+  const total = QUIZ_QUESTIONS.length;
+  const r = document.getElementById('quizFinalReport');
+  let title = '';
+  if(quizUserScore >= 11) title = "🏆 把字句宗师 (Магистр конструкции 把 — 100% мастерство)";
+  else if(quizUserScore >= 8) title = "🥈 把字句高手 (Продвинутый уровень владения 把)";
+  else title = "🥉 把字句学者 (Базовый уровень — повторите правила в разделе 7)";
+
+  r.innerHTML = `
+    <div style="padding:18px; border:2px solid var(--ink); border-radius:12px; background:var(--ok-bg);">
+      <h3>Итоговый результат: ${quizUserScore} из ${total} баллов (${Math.round(quizUserScore/total*100)}%)</h3>
+      <p style="font-size:18px; font-weight:800; color:var(--accent2); margin-top:6px;">${title}</p>
+    </div>
+  `;
+  markTaskComplete('final_quiz');
+}
+
+// Initialize everything on load
+window.addEventListener('DOMContentLoaded', () => {
+  renderDict();
+  renderRadicals();
+  renderTimeline();
+  renderReading();
+  renderMatchRound();
+  renderTransformations();
+  renderBuilder();
+  renderErrors();
+  renderGaps();
+  renderTranslations();
+  renderQuiz();
+});
+</script>
+</body>
+</html>
